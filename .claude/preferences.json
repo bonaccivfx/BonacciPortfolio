@@ -1,0 +1,25 @@
+{
+  "codeStyle": {
+    "errorHandling": "comprehensive",
+    "comments": "inline for complex logic only",
+    "typescript": "strict mode enabled",
+    "formatting": "Prettier with 2-space indents"
+  },
+  
+  "testing": {
+    "approach": "test critical user paths",
+    "priority": "accessibility and security first"
+  },
+  
+  "communication": {
+    "tone": "direct and actionable",
+    "metaphors": "VFX compositing when helpful",
+    "explanations": "teach the 'why' not just the 'how'"
+  },
+  
+  "workflow": {
+    "commits": "descriptive messages",
+    "branches": "feature branches for new work",
+    "reviews": "explain significant changes"
+  }
+}

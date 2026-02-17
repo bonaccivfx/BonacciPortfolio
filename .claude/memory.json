@@ -1,0 +1,46 @@
+{
+  "projectName": "Tri-Identity Portfolio",
+  "projectType": "Next.js Website",
+  "description": "A portfolio website showcasing three professional identities: VFX Compositor, Special Education Teacher, and Full-Stack Developer",
+  
+  "owner": {
+    "name": "Bonacci",
+    "identities": [
+      "VFX Compositor (10+ years, Los Angeles/Toronto/New York)",
+      "Special Education Teacher",
+      "Full-Stack Developer"
+    ],
+    "keyProject": "They Shall Not Grow Old (VFX work)"
+  },
+  
+  "techStack": {
+    "framework": "Next.js 15",
+    "language": "TypeScript",
+    "styling": "Tailwind CSS",
+    "packageManager": "pnpm",
+    "deployment": "Cloudflare Pages (planned)"
+  },
+  
+  "development": {
+    "currentPhase": "Foundation Setup - Week 1-3",
+    "nextMilestone": "Build Hero component with tri-identity concept",
+    "codeStandards": "Production-ready with comprehensive error handling",
+    "security": "Security-first approach, monthly reviews",
+    "license": "MIT (for educational tools)"
+  },
+  
+  "projectStructure": {
+    "components": {
+      "shared": "Components used across all three identities",
+      "vfx": "VFX Compositor-specific components",
+      "education": "Teaching-focused components",
+      "dev": "Development showcase components"
+    }
+  },
+  
+  "preferences": {
+    "explanationStyle": "Use VFX compositing metaphors when helpful",
+    "communicationStyle": "Direct, clear, precise, actionable",
+    "approach": "Phased development with milestone preservation"
+  }
+}
