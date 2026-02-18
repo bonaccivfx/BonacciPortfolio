@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Home", href: "#home", accent: null },
-  { label: "About", href: "#about", accent: null },
-  { label: "VFX Work", href: "#vfx", accent: "cyan" },
-  { label: "Teaching Tools", href: "#teaching", accent: "green" },
-  { label: "Dev Projects", href: "#projects", accent: "orange" },
-  { label: "Contact", href: "#contact", accent: null },
+  { label: "Home", href: "/", accent: null },
+  { label: "About", href: "/about", accent: null },
+  { label: "VFX Work", href: "/vfx", accent: "cyan" },
+  { label: "Teaching Tools", href: "/teaching", accent: "green" },
+  { label: "Dev Projects", href: "/dev", accent: "orange" },
+  { label: "Contact", href: "/contact", accent: null },
 ] as const;
 
 const accentStyles = {
@@ -33,36 +34,12 @@ const accentStyles = {
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("#home");
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Track which section is currently in view
-  useEffect(() => {
-    const sectionIds = navLinks.map(({ href }) => href.slice(1));
-    const observers: IntersectionObserver[] = [];
-
-    for (const id of sectionIds) {
-      const el = document.getElementById(id);
-      if (!el) continue;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(`#${id}`);
-          }
-        },
-        { rootMargin: "-40% 0px -55% 0px" }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    }
-
-    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -85,7 +62,7 @@ export default function Navigation() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo / Brand */}
           <Link
-            href="#home"
+            href="/"
             className="text-lg font-bold bg-gradient-to-r from-blue-400 via-violet-400 to-purple-500 bg-clip-text text-transparent hover:brightness-125 transition-all duration-300"
           >
             Portfolio
@@ -94,7 +71,7 @@ export default function Navigation() {
           {/* Desktop links */}
           <ul className="hidden md:flex items-center gap-1">
             {navLinks.map(({ label, href, accent }) => {
-              const isActive = activeSection === href;
+              const isActive = pathname === href;
               const styles = accent ? accentStyles[accent] : null;
               return (
                 <li key={href}>
@@ -159,7 +136,7 @@ export default function Navigation() {
       >
         <ul className="flex flex-col items-center justify-center gap-2 pt-12">
           {navLinks.map(({ label, href, accent }, i) => {
-            const isActive = activeSection === href;
+            const isActive = pathname === href;
             const styles = accent ? accentStyles[accent] : null;
             return (
               <li
