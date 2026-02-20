@@ -80,10 +80,10 @@ body {
 
 @keyframes pulse-cyan {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.5);
+    box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.38);
   }
   50% {
-    box-shadow: 0 0 16px 4px rgba(0, 217, 255, 0.3);
+    box-shadow: 0 0 12px 3px rgba(0, 217, 255, 0.23);
   }
 }
 
@@ -105,11 +105,11 @@ body {
 
 /* Gradient text glow — apply to bg-clip-text spans.
    text-shadow is invisible on transparent-fill text; drop-shadow works correctly. */
-.glow-red    { filter: drop-shadow(0 0 18px rgba(201, 8,   8,   0.45)); } /* VFX */
-.glow-green  { filter: drop-shadow(0 0 18px rgba(37,  201, 8,   0.45)); } /* Teaching */
-.glow-blue   { filter: drop-shadow(0 0 18px rgba(10,  139, 245, 0.45)); } /* Dev */
-.glow-indigo { filter: drop-shadow(0 0 16px rgba(139, 120, 255, 0.28)); } /* Multi-identity */
+.glow-red    { filter: drop-shadow(0 0 14px rgba(201, 8,   8,   0.34)); } /* VFX */
+.glow-green  { filter: drop-shadow(0 0 14px rgba(37,  201, 8,   0.34)); } /* Teaching */
+.glow-blue   { filter: drop-shadow(0 0 14px rgba(10,  139, 245, 0.34)); } /* Dev */
+.glow-indigo { filter: drop-shadow(0 0 12px rgba(139, 120, 255, 0.21)); } /* Multi-identity */
 /* Legacy aliases — kept so existing class names still compile */
-.glow-cyan   { filter: drop-shadow(0 0 18px rgba(201, 8,   8,   0.45)); }
-.glow-amber  { filter: drop-shadow(0 0 18px rgba(37,  201, 8,   0.45)); }
-.glow-orange { filter: drop-shadow(0 0 18px rgba(10,  139, 245, 0.45)); }
+.glow-cyan   { filter: drop-shadow(0 0 14px rgba(201, 8,   8,   0.34)); }
+.glow-amber  { filter: drop-shadow(0 0 14px rgba(37,  201, 8,   0.34)); }
+.glow-orange { filter: drop-shadow(0 0 14px rgba(10,  139, 245, 0.34)); }

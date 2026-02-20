@@ -54,7 +54,7 @@ function validate(fields: FormFields): FormErrors {
 /* ─── Shared input class ─────────────────────────────────────────── */
 
 const BASE_INPUT =
-  "w-full rounded-xl border bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-slate-500 backdrop-blur-sm transition-all duration-200 focus:outline-none focus:border-[#00D9FF]/50 focus:ring-1 focus:ring-[#00D9FF]/30";
+  "w-full rounded-xl border bg-white/[0.04] px-4 py-3 text-base text-white placeholder-slate-500 backdrop-blur-sm transition-all duration-200 focus:outline-none focus:border-[#00D9FF]/50 focus:ring-1 focus:ring-[#00D9FF]/30";
 
 function inputClass(hasError: boolean): string {
   return `${BASE_INPUT} ${hasError ? "border-red-500/60" : "border-white/10"}`;
@@ -123,7 +123,7 @@ export default function ContactForm() {
       <div className="rounded-2xl border border-green-500/30 bg-green-500/5 p-10 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-green-400" />
         <h3 className="mt-4 text-xl font-bold text-white">Message Sent!</h3>
-        <p className="mt-2 text-slate-300/90">
+        <p className="mt-2 text-lg text-slate-300/90">
           Thanks for reaching out! I&apos;ll get back to you soon.
         </p>
       </div>
@@ -166,7 +166,7 @@ export default function ContactForm() {
       {formState === "error" && (
         <div className="mb-5 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/5 px-4 py-3">
           <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-400" />
-          <p className="text-sm text-slate-300">
+          <p className="text-base text-slate-300">
             Something went wrong. Please email me directly at{" "}
             <a
               href="mailto:bonaccivfx@gmail.com"
@@ -184,7 +184,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="name"
-            className="mb-1.5 block text-sm font-medium text-slate-300"
+            className="mb-1.5 block text-base font-medium text-slate-300"
           >
             Name <span className="text-red-400">*</span>
           </label>
@@ -201,7 +201,7 @@ export default function ContactForm() {
             className={inputClass(!!errors.name)}
           />
           {errors.name && (
-            <p id="name-error" className="mt-1 text-xs text-red-400" role="alert">
+            <p id="name-error" className="mt-1 text-sm text-red-400" role="alert">
               {errors.name}
             </p>
           )}
@@ -211,7 +211,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="mb-1.5 block text-sm font-medium text-slate-300"
+            className="mb-1.5 block text-base font-medium text-slate-300"
           >
             Email <span className="text-red-400">*</span>
           </label>
@@ -228,7 +228,7 @@ export default function ContactForm() {
             className={inputClass(!!errors.email)}
           />
           {errors.email && (
-            <p id="email-error" className="mt-1 text-xs text-red-400" role="alert">
+            <p id="email-error" className="mt-1 text-sm text-red-400" role="alert">
               {errors.email}
             </p>
           )}
@@ -239,7 +239,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="subject"
-          className="mb-1.5 block text-sm font-medium text-slate-300"
+          className="mb-1.5 block text-base font-medium text-slate-300"
         >
           Subject <span className="text-red-400">*</span>
         </label>
@@ -256,7 +256,7 @@ export default function ContactForm() {
           className={inputClass(!!errors.subject)}
         />
         {errors.subject && (
-          <p id="subject-error" className="mt-1 text-xs text-red-400" role="alert">
+          <p id="subject-error" className="mt-1 text-sm text-red-400" role="alert">
             {errors.subject}
           </p>
         )}
@@ -266,7 +266,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="mb-1.5 block text-sm font-medium text-slate-300"
+          className="mb-1.5 block text-base font-medium text-slate-300"
         >
           Message <span className="text-red-400">*</span>
         </label>
@@ -283,7 +283,7 @@ export default function ContactForm() {
           className={`${inputClass(!!errors.message)} resize-none`}
         />
         {errors.message && (
-          <p id="message-error" className="mt-1 text-xs text-red-400" role="alert">
+          <p id="message-error" className="mt-1 text-sm text-red-400" role="alert">
             {errors.message}
           </p>
         )}
@@ -293,7 +293,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500 px-8 py-3.5 text-sm font-semibold text-[#0a1628] shadow-lg shadow-[#00D9FF]/20 transition-all hover:brightness-110 hover:shadow-xl hover:shadow-[#00D9FF]/30 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500 px-8 py-3.5 text-sm font-semibold text-[#0a1628] shadow-lg shadow-[#00D9FF]/15 transition-all hover:brightness-110 hover:shadow-xl hover:shadow-[#00D9FF]/[23] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isLoading ? (
           <>

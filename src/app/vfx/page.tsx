@@ -150,7 +150,7 @@ export default function VfxPage() {
                 Portfolio
               </span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300/90 sm:text-xl">
+            <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-300/90 sm:text-2xl">
               10+ years crafting invisible effects across Los Angeles, Toronto,
               and New York
             </p>
@@ -178,7 +178,7 @@ export default function VfxPage() {
         <ScrollReveal delay={80}>
           <section className="mt-28">
             <SectionHeader title="Main Demo Reels" />
-            <p className="mt-3 text-sm text-slate-400">
+            <p className="mt-3 text-base text-slate-400">
               Click any reel to play — or open directly on Vimeo.
             </p>
 
@@ -192,7 +192,7 @@ export default function VfxPage() {
                     vimeoUrl={`https://vimeo.com/${video.id}`}
                     size="large"
                   />
-                  <p className="mt-3 text-center text-sm font-medium text-slate-300/80">
+                  <p className="mt-3 text-center text-base font-medium text-slate-300/80">
                     {video.title}
                   </p>
                 </div>
@@ -208,7 +208,7 @@ export default function VfxPage() {
                   vimeoUrl={`https://vimeo.com/${mainReels[2].id}`}
                   size="large"
                 />
-                <p className="mt-3 text-center text-sm font-medium text-slate-300/80">
+                <p className="mt-3 text-center text-base font-medium text-slate-300/80">
                   {mainReels[2].title}
                 </p>
               </div>
@@ -312,7 +312,7 @@ export default function VfxPage() {
         <ScrollReveal delay={100}>
           <section className="mt-20">
             <SectionHeader title="Project Breakdowns" sub />
-            <p className="mt-2 text-xs text-slate-500">
+            <p className="mt-2 text-sm text-slate-500">
               Shot-by-shot breakdowns showing process and technique.
             </p>
 
@@ -342,7 +342,7 @@ export default function VfxPage() {
                   <h2 className="text-xl font-semibold text-slate-300 sm:text-2xl">
                     Technical Tests &amp; Studies
                   </h2>
-                  <p className="mt-0.5 text-xs text-slate-500">
+                  <p className="mt-0.5 text-sm text-slate-500">
                     {technicalDemos.length} demonstrations — click to expand
                   </p>
                 </div>
@@ -392,7 +392,7 @@ export default function VfxPage() {
                 VFX Portfolio Gallery
               </h2>
               <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#C90808] to-red-700" />
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-base text-slate-400">
                 3D work, additional compositing, and digital drawings
               </p>
             </div>
@@ -446,7 +446,7 @@ export default function VfxPage() {
                 Photography &amp; Visual Studies
               </h2>
               <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-amber-400 to-orange-500" />
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-base text-slate-400">
                 Complementary creative work demonstrating visual storytelling
                 and composition
               </p>

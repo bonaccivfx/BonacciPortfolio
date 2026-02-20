@@ -108,7 +108,7 @@ export default function BeforeAfterSlider({
 
       {/* Slider line */}
       <div
-        className="absolute top-0 bottom-0 w-0.5 bg-[var(--accent-cyan)] shadow-[0_0_8px_var(--accent-cyan)]"
+        className="absolute top-0 bottom-0 w-0.5 bg-[var(--accent-cyan)] shadow-[0_0_6px_var(--accent-cyan)]"
         style={{ left: `${position}%`, transform: "translateX(-50%)" }}
       />
 
@@ -121,7 +121,7 @@ export default function BeforeAfterSlider({
         aria-valuemax={100}
         aria-label="Before and after comparison slider"
         onKeyDown={handleKeyDown}
-        className="absolute top-1/2 z-10 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border-2 border-[var(--accent-cyan)] bg-black/70 shadow-lg shadow-[var(--accent-cyan)]/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)]"
+        className="absolute top-1/2 z-10 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border-2 border-[var(--accent-cyan)] bg-black/70 shadow-lg shadow-[var(--accent-cyan)]/[23] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)]"
         style={{ left: `${position}%` }}
       >
         <svg

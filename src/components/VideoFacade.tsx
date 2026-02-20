@@ -124,7 +124,7 @@ export default function VideoFacade({
 
       {/* Play button */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className={`flex ${playBtnSize} items-center justify-center rounded-full bg-[var(--accent-cyan)]/90 shadow-lg shadow-[var(--accent-cyan)]/30 transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-[var(--accent-cyan)]/40 animate-pulse-cyan`}>
+        <div className={`flex ${playBtnSize} items-center justify-center rounded-full bg-[var(--accent-cyan)]/90 shadow-lg shadow-[var(--accent-cyan)]/[23] transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-[var(--accent-cyan)]/30 animate-pulse-cyan`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

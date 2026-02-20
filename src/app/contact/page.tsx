@@ -234,7 +234,7 @@ export default function ContactPage() {
               Together
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300/90 sm:text-xl">
+          <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-300/90 sm:text-2xl">
             Whether it&apos;s compositing, teaching, or building tools—I&apos;m
             always open to interesting challenges and collaborations.
           </p>
@@ -331,7 +331,7 @@ export default function ContactPage() {
                   <p className="mt-4 text-base font-bold text-white">
                     {item.title}
                   </p>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                  <p className="mt-2 text-base leading-relaxed text-slate-400">
                     {item.description}
                   </p>
                 </div>
@@ -343,7 +343,7 @@ export default function ContactPage() {
         {/* ── 4. Response info ─────────────────────────────────── */}
         <ScrollReveal delay={120}>
           <section className="mt-20 text-center">
-            <p className="text-sm text-slate-400">
+            <p className="text-base text-slate-400">
               I typically respond within{" "}
               <span className="font-medium text-slate-300">24–48 hours</span>.
               {" "}For urgent inquiries,{" "}
@@ -357,7 +357,7 @@ export default function ContactPage() {
               </a>{" "}
               is often fastest.
             </p>
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-base text-slate-500">
               Based in New York &middot; Available for remote and on-site work
             </p>
           </section>

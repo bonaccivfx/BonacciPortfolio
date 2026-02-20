@@ -87,7 +87,7 @@ export default function AboutPage() {
           <p className="mt-4 text-xl font-semibold text-slate-300 sm:text-2xl">
             Compositor. Educator. Developer.
           </p>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300/90">
+          <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-300/90">
             10+ years transforming impossible shots into seamless reality, then
             teaching others to do the same—and building the tools that make it
             all possible.
@@ -111,7 +111,7 @@ export default function AboutPage() {
                     The Compositor
                   </h3>
                 </div>
-                <p className="mt-4 leading-relaxed text-slate-300/90">
+                <p className="mt-4 text-lg leading-relaxed text-slate-300/90">
                   I&apos;ve spent a decade making the invisible visible across
                   Los Angeles, Toronto, and New York. From Star Trek Beyond to
                   Guardians of the Galaxy Vol. 3, I&apos;ve crafted shots that
@@ -133,7 +133,7 @@ export default function AboutPage() {
                     The Educator
                   </h3>
                 </div>
-                <p className="mt-4 leading-relaxed text-slate-300/90">
+                <p className="mt-4 text-lg leading-relaxed text-slate-300/90">
                   Education found me through industry experience. After years of
                   solving complex visual problems, I realized I could help others
                   have those &quot;aha!&quot; moments that transformed my own
@@ -156,7 +156,7 @@ export default function AboutPage() {
                     The Developer
                   </h3>
                 </div>
-                <p className="mt-4 leading-relaxed text-slate-300/90">
+                <p className="mt-4 text-lg leading-relaxed text-slate-300/90">
                   Code became the bridge between my two worlds. I build
                   educational tools that save teachers hours of work—like
                   turning lesson plans into presentations automatically. I create
@@ -180,14 +180,14 @@ export default function AboutPage() {
             <div className="mt-2 h-0.5 w-16 rounded-full bg-gradient-to-r from-indigo-400 to-purple-500" />
 
             <div className="mt-10 rounded-2xl border border-indigo-400/15 bg-gradient-to-br from-indigo-500/5 via-white/[0.02] to-transparent p-8 sm:p-10">
-              <p className="leading-relaxed text-slate-300/90">
+              <p className="text-lg leading-relaxed text-slate-300/90">
                 I&apos;m proudest of my perseverance. Complex challenges
                 don&apos;t scare me—they energize me. Whether it&apos;s a shot
                 that seems impossible, a student struggling with a concept, or a
                 technical problem that needs a creative solution, I thrive in
                 the intersection of technical precision and artistic vision.
               </p>
-              <p className="mt-5 leading-relaxed text-slate-300/90">
+              <p className="mt-5 text-lg leading-relaxed text-slate-300/90">
                 The process matters as much as the product. Every frame teaches
                 something. Every student&apos;s breakthrough matters. Every line
                 of code should solve a real problem.
@@ -306,12 +306,12 @@ export default function AboutPage() {
             <div className="mt-2 h-0.5 w-16 rounded-full bg-gradient-to-r from-indigo-400 to-purple-500" />
 
             <div className="mt-8 space-y-5 max-w-3xl">
-              <p className="leading-relaxed text-slate-300/90">
+              <p className="text-lg leading-relaxed text-slate-300/90">
                 I create and study in my free time. The technical and artistic
                 process propels me through life—I enjoy every second of the
                 journey.
               </p>
-              <p className="leading-relaxed text-slate-300/90">
+              <p className="text-lg leading-relaxed text-slate-300/90">
                 My teaching philosophy centers on &quot;aha moments&quot;—those
                 breakthrough instances when everything clicks. I design my
                 lessons around them because I remember how powerful they were in
@@ -328,7 +328,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
               Let&apos;s Collaborate
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300/90">
+            <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-300/90">
               Whether you need a compositor who solves impossible problems, an
               educator who makes complex concepts accessible, or a developer who
               builds tools that matter—let&apos;s talk.

@@ -63,6 +63,12 @@ const resources = [
 
 import PageTransition from "@/components/shared/PageTransition";
 
+export const metadata = {
+  title: "Teaching Tools — Bonacci",
+  description:
+    "Educational tools and resources for inclusive, accessible learning — built from real classroom experience in special education.",
+};
+
 export default function TeachingPage() {
   return (
     <PageTransition>
@@ -84,7 +90,7 @@ export default function TeachingPage() {
               & Resources
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300/90 sm:text-xl">
+          <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-300/90 sm:text-2xl">
             Making education accessible and effective for every learner —
             practical tools, inclusive strategies, and resources built from
             real classroom experience in special education.
@@ -97,7 +103,7 @@ export default function TeachingPage() {
             Lesson Plan Generator
           </h2>
           <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#25C908] to-green-700" />
-          <p className="mt-4 max-w-2xl text-slate-300/90">
+          <p className="mt-4 max-w-2xl text-lg text-slate-300/90">
             A tool designed to help educators quickly scaffold standards-aligned
             lesson plans with built-in accommodations and modifications for
             diverse learners.
@@ -110,7 +116,7 @@ export default function TeachingPage() {
                 className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#25C908]/40 hover:bg-white/10 hover:-translate-y-1"
               >
                 <h3 className="text-lg font-semibold text-white">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300/80">
+                <p className="mt-3 text-base leading-relaxed text-slate-300/80">
                   {description}
                 </p>
               </div>
@@ -136,7 +142,7 @@ export default function TeachingPage() {
                 </span>
                 <div>
                   <h3 className="text-lg font-semibold text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300/80">
+                  <p className="mt-2 text-base leading-relaxed text-slate-300/80">
                     {description}
                   </p>
                 </div>
@@ -159,13 +165,13 @@ export default function TeachingPage() {
                 className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#25C908]/40 hover:bg-white/10 hover:-translate-y-1"
               >
                 <div className="flex items-center gap-3">
-                  <span className="h-2 w-2 rounded-full bg-[#25C908]shadow-lg shadow-[#25C908]/50" />
+                  <span className="h-2 w-2 rounded-full bg-[#25C908] shadow-lg shadow-[#25C908]/[38]" />
                   <h3 className="text-lg font-semibold text-white">{title}</h3>
                 </div>
                 <span className="mt-2 inline-block rounded-full bg-[#25C908]/10 px-3 py-0.5 text-xs font-medium text-[#25C908] ring-1 ring-[#25C908]/20">
                   {type}
                 </span>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300/80">
+                <p className="mt-3 text-base leading-relaxed text-slate-300/80">
                   {description}
                 </p>
               </div>

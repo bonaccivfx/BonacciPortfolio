@@ -104,7 +104,7 @@ export default function Hero() {
           ))}
         </div>
 
-        <p className="animate-fade-in-up animation-delay-400 mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-slate-300/90 sm:text-xl">
+        <p className="animate-fade-in-up animation-delay-400 mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-slate-300/90 sm:text-2xl">
           Three disciplines. One creative mind. I blend artistry, empathy, and
           technology to craft meaningful experiences.
         </p>
@@ -114,7 +114,7 @@ export default function Hero() {
           {/* View Showreel */}
           <Link
             href="/vfx"
-            className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#C90808] to-red-700 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#C90808]/25 transition-all hover:brightness-110 hover:shadow-xl hover:shadow-[#C90808]/30 active:scale-[0.98]"
+            className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#C90808] to-red-700 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-[#C90808]/[19] transition-all hover:brightness-110 hover:shadow-xl hover:shadow-[#C90808]/[23] active:scale-[0.98]"
           >
             {/* Play icon */}
             <svg
@@ -133,7 +133,7 @@ export default function Hero() {
           {/* Explore Projects */}
           <Link
             href="/dev"
-            className="inline-flex items-center gap-2.5 rounded-full border border-[#0A8BF5]/50 bg-[#0A8BF5]/10 px-8 py-3.5 text-base font-semibold text-[#0A8BF5] transition-all hover:border-[#0A8BF5] hover:bg-[#0A8BF5]/20 hover:shadow-lg hover:shadow-[#0A8BF5]/20 active:scale-[0.98]"
+            className="inline-flex items-center gap-2.5 rounded-full border border-[#0A8BF5]/50 bg-[#0A8BF5]/10 px-8 py-3.5 text-base font-semibold text-[#0A8BF5] transition-all hover:border-[#0A8BF5] hover:bg-[#0A8BF5]/20 hover:shadow-lg hover:shadow-[#0A8BF5]/15 active:scale-[0.98]"
           >
             Explore Projects
             {/* Arrow icon */}
@@ -155,9 +155,17 @@ export default function Hero() {
         </div>
 
         {/* ── "Explore My Work" dropdown ──────────────────────── */}
+        {/*
+          z-[9999] on the WRAPPER (not just the panel) is the fix.
+          backdrop-blur-sm on the identity cards creates new stacking contexts
+          that paint in DOM order — since the cards come after the dropdown in
+          the DOM they would render on top of a z-20 child.  Giving the wrapper
+          an explicit z-[9999] makes IT form a stacking context at that level,
+          which is unambiguously above everything else in the section.
+        */}
         <div
           ref={dropdownRef}
-          className="animate-fade-in-up animation-delay-800 relative mt-4 inline-block"
+          className="animate-fade-in-up animation-delay-800 relative z-[9999] mt-4 inline-block"
         >
           <button
             type="button"
@@ -188,7 +196,7 @@ export default function Hero() {
           {dropdownOpen && (
             <div
               role="menu"
-              className="absolute left-1/2 top-full z-20 mt-2 w-56 -translate-x-1/2 overflow-hidden rounded-xl border border-white/10 bg-[#0a1628]/95 shadow-xl shadow-black/40 backdrop-blur-xl"
+              className="absolute left-1/2 top-full mt-2 w-56 -translate-x-1/2 overflow-hidden rounded-xl border border-white/15 bg-[#080c1c]/97 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.6),_0_0_0_1px_rgba(255,255,255,0.06)]"
             >
               {dropdownItems.map(({ label, href, desc }) => (
                 <Link
@@ -235,7 +243,7 @@ export default function Hero() {
                 >
                   {title}
                 </h2>
-                <p className="mt-2 text-sm text-slate-400">{detail}</p>
+                <p className="mt-2 text-base text-slate-400">{detail}</p>
                 <div
                   style={{ borderTopColor: `rgba(${rgb}, 0.25)` }}
                   className="mt-4 border-t pt-3"

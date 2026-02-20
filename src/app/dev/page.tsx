@@ -57,6 +57,12 @@ const contributions = [
 
 import PageTransition from "@/components/shared/PageTransition";
 
+export const metadata = {
+  title: "Dev Projects — Bonacci",
+  description:
+    "Full-stack development projects spanning educational technology, VFX pipeline automation, and modern web applications.",
+};
+
 export default function DevPage() {
   return (
     <PageTransition>
@@ -78,7 +84,7 @@ export default function DevPage() {
               Projects
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300/90 sm:text-xl">
+          <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-300/90 sm:text-2xl">
             Building tools and applications that solve real problems — from
             classroom management platforms to VFX pipeline automation and
             modern web experiences.
@@ -115,7 +121,7 @@ export default function DevPage() {
                     </span>
                   ))}
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300/80">
+                <p className="mt-3 text-base leading-relaxed text-slate-300/80">
                   {description}
                 </p>
               </div>
@@ -142,7 +148,7 @@ export default function DevPage() {
                 <ul className="mt-4 space-y-2.5">
                   {items.map((item) => (
                     <li key={item} className="flex items-center gap-3">
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0A8BF5] shadow-lg shadow-[#0A8BF5]/50" />
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0A8BF5] shadow-lg shadow-[#0A8BF5]/[38]" />
                       <span className="text-sm text-slate-300/90">{item}</span>
                     </li>
                   ))}
@@ -165,7 +171,7 @@ export default function DevPage() {
                 key={project}
                 className="flex gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#0A8BF5]/40 hover:bg-white/10 sm:p-8"
               >
-                <span className="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-[#0A8BF5] shadow-lg shadow-[#0A8BF5]/50" />
+                <span className="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-[#0A8BF5] shadow-lg shadow-[#0A8BF5]/[38]" />
                 <div>
                   <div className="flex flex-wrap items-center gap-3">
                     <h3 className="text-lg font-semibold text-white">
@@ -175,7 +181,7 @@ export default function DevPage() {
                       {role}
                     </span>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300/80">
+                  <p className="mt-2 text-base leading-relaxed text-slate-300/80">
                     {description}
                   </p>
                 </div>
