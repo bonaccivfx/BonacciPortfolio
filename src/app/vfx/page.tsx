@@ -1,28 +1,41 @@
+import { mainReels, breakdowns, technicalDemos } from "@/data/vfx-videos";
 import ScrollReveal from "@/components/ScrollReveal";
 import VideoFacade from "@/components/VideoFacade";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import FrameViewer from "@/components/FrameViewer";
-import LightboxGallery from "@/components/LightboxGallery";
+import PaginatedLightboxGallery from "@/components/PaginatedLightboxGallery";
+import {
+  vfxGallery,
+  photographyGallery,
+  vfxGalleryCategories,
+  photographyCategories,
+} from "@/data/gallery-images";
 
 export const metadata = {
-  title: "VFX Compositor Portfolio — Bonacci",
+  title: "VFX Compositing Portfolio — Bonacci",
   description:
     "10+ years of visual effects compositing across film, episodic, and commercial projects.",
 };
 
-/* ─── Data ───────────────────────────────────────────────────────── */
+/* ─── Static data ─────────────────────────────────────────────── */
 
-const primaryReel = {
-  vimeoId: "983360818",
-  title: "VFX Compositing Reel",
-  vimeoUrl: "https://vimeo.com/983360818",
-};
+const stats = [
+  { value: "10+", label: "Years Experience" },
+  { value: "3", label: "Cities" },
+  { value: "34+", label: "Productions" },
+];
 
-const breakdownReel = {
-  vimeoId: "458259067",
-  title: "Breakdown Reel",
-  vimeoUrl: "https://vimeo.com/458259067",
-};
+const filmCredits = [
+  { title: "Star Trek Beyond", year: 2016, role: "Compositor" },
+  { title: "Guardians of the Galaxy Vol. 3", year: 2023, role: "Compositor" },
+  { title: "Ready Player One", year: 2018, role: "Compositor" },
+  { title: "They Shall Not Grow Old", year: 2018, role: "Compositor" },
+] as const;
+
+const tvCredits = [
+  { title: "Ripley", network: "Netflix", year: 2024 },
+  { title: "Mr & Mrs. Smith", network: "Amazon", year: 2024 },
+] as const;
 
 const beforeAfterPairs = [
   {
@@ -32,14 +45,16 @@ const beforeAfterPairs = [
     afterAlt: "Final composite with CG environment",
     beforeLabel: "Raw Plate",
     afterLabel: "Final Comp",
+    caption: "Greenscreen extraction & environment integration",
   },
   {
     beforeSrc: "/vfx/before-cleanup.jpg",
     afterSrc: "/vfx/after-cleanup.jpg",
     beforeAlt: "Plate with wires and rigs visible",
-    afterAlt: "Clean plate after wire and rig removal",
+    afterAlt: "Clean plate after wire removal",
     beforeLabel: "Production Plate",
     afterLabel: "Cleaned Up",
+    caption: "Wire removal & rig cleanup",
   },
 ] as const;
 
@@ -50,107 +65,265 @@ const frameLayers = [
   { label: "Atmosphere & Fog", src: "/vfx/layer-atmo.jpg" },
   { label: "Color Grade", src: "/vfx/layer-grade.jpg" },
   { label: "Final Composite", src: "/vfx/layer-final.jpg" },
-] as const;
+];
 
-const galleryCategories = ["All", "Feature", "Episodic", "Commercial"] as const;
 
-const galleryItems = [
-  { src: "/vfx/gallery/feat-01.jpg", alt: "CG environment integration", title: "Environment Integration", category: "Feature" },
-  { src: "/vfx/gallery/feat-02.jpg", alt: "Digital matte painting", title: "Matte Painting", category: "Feature" },
-  { src: "/vfx/gallery/feat-03.jpg", alt: "Creature compositing", title: "Creature Comp", category: "Feature" },
-  { src: "/vfx/gallery/ep-01.jpg", alt: "Episodic set extension", title: "Set Extension", category: "Episodic" },
-  { src: "/vfx/gallery/ep-02.jpg", alt: "Greenscreen extraction", title: "Greenscreen Key", category: "Episodic" },
-  { src: "/vfx/gallery/ep-03.jpg", alt: "2.5D projection", title: "2.5D Projection", category: "Episodic" },
-  { src: "/vfx/gallery/comm-01.jpg", alt: "Automotive CG composite", title: "Auto Commercial", category: "Commercial" },
-  { src: "/vfx/gallery/comm-02.jpg", alt: "Beauty and cleanup work", title: "Beauty Work", category: "Commercial" },
-] as const;
+/* ─── Shared sub-components ──────────────────────────────────── */
 
-/* ─── Page ───────────────────────────────────────────────────────── */
+function SectionHeader({
+  title,
+  sub = false,
+}: {
+  title: string;
+  sub?: boolean;
+}) {
+  return (
+    <>
+      <h2
+        className={
+          sub
+            ? "text-xl font-semibold text-slate-300 sm:text-2xl"
+            : "text-2xl font-bold text-white sm:text-3xl"
+        }
+      >
+        {title}
+      </h2>
+      <div
+        className={`mt-2 h-0.5 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500 ${
+          sub ? "w-10 opacity-60" : "w-16"
+        }`}
+      />
+    </>
+  );
+}
+
+function ImdbBadge() {
+  return (
+    <span className="inline-flex items-center rounded bg-[#F5C518] px-2 py-0.5 text-[11px] font-extrabold tracking-wide text-black">
+      IMDb
+    </span>
+  );
+}
+
+/* Film reel icon for credit cards */
+function FilmIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-5 w-5"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+    </svg>
+  );
+}
+
+/* ─── Page ───────────────────────────────────────────────────── */
 
 export default function VfxPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a1628] via-[#1a1052] to-[#2d1b69]">
-      {/* Radial overlays */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,217,255,0.12),_transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(139,92,246,0.15),_transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,217,255,0.05),_transparent_70%)]" />
+      {/* Background overlays */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,217,255,0.12),_transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(139,92,246,0.15),_transparent_50%)]" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pt-32 pb-24 sm:px-12">
-        {/* ── Hero ──────────────────────────────────────────── */}
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-32 pb-24 sm:px-12">
+
+        {/* ── 1. Hero ─────────────────────────────────────────── */}
         <ScrollReveal>
           <section className="text-center">
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-[#00D9FF]/80">
               Visual Effects
             </p>
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
-              VFX Compositor{" "}
+              VFX Compositing{" "}
               <span className="bg-gradient-to-r from-[#00D9FF] to-blue-500 bg-clip-text text-transparent">
                 Portfolio
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300/90 sm:text-xl">
-              10+ years experience across Los Angeles, Toronto, and New York —
-              delivering invisible effects and hero shots for film, episodic, and
-              commercial projects.
-            </p>
-          </section>
-        </ScrollReveal>
-
-        {/* ── Demo Reels — hero-sized two-column layout ───── */}
-        <ScrollReveal delay={100}>
-          <section className="mt-24">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              Demo Reels
-            </h2>
-            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
-            <p className="mt-3 text-sm text-slate-400">
-              Watch my compositing and breakdown reels — click to play, or open directly on Vimeo.
+              10+ years crafting invisible effects across Los Angeles, Toronto,
+              and New York
             </p>
 
-            <div className="mt-8 grid gap-6 lg:grid-cols-3">
-              {/* Primary reel — 2/3 width on desktop, hero-sized */}
-              <div className="lg:col-span-2">
-                <VideoFacade
-                  vimeoId={primaryReel.vimeoId}
-                  title={primaryReel.title}
-                  vimeoUrl={primaryReel.vimeoUrl}
-                  size="large"
-                />
-                <p className="mt-3 text-center text-sm font-medium text-slate-300/70">
-                  Primary Compositing Reel
-                </p>
-              </div>
-
-              {/* Breakdown reel — 1/3 width on desktop */}
-              <div className="flex flex-col">
-                <VideoFacade
-                  vimeoId={breakdownReel.vimeoId}
-                  title={breakdownReel.title}
-                  vimeoUrl={breakdownReel.vimeoUrl}
-                  size="default"
-                />
-                <p className="mt-3 text-center text-sm font-medium text-slate-300/70">
-                  Breakdown Reel
-                </p>
-              </div>
+            {/* Stat badges */}
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-2xl border border-[#00D9FF]/20 bg-[#00D9FF]/5 px-8 py-5 backdrop-blur-sm"
+                >
+                  <div className="text-3xl font-extrabold text-[#00D9FF]">
+                    {stat.value}
+                  </div>
+                  <div className="mt-1 text-xs font-medium uppercase tracking-wider text-slate-400">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
         </ScrollReveal>
 
-        {/* ── Before / After ────────────────────────────────── */}
+        {/* ── 2. Main Demo Reels (large, 2-col) ───────────────── */}
+        <ScrollReveal delay={80}>
+          <section className="mt-28">
+            <SectionHeader title="Main Demo Reels" />
+            <p className="mt-3 text-sm text-slate-400">
+              Click any reel to play — or open directly on Vimeo.
+            </p>
+
+            {/* First two reels: 2-col on desktop */}
+            <div className="mt-8 grid gap-8 lg:grid-cols-2">
+              {mainReels.slice(0, 2).map((video) => (
+                <div key={video.id} className="flex flex-col">
+                  <VideoFacade
+                    vimeoId={video.id}
+                    title={video.title}
+                    vimeoUrl={`https://vimeo.com/${video.id}`}
+                    size="large"
+                  />
+                  <p className="mt-3 text-center text-sm font-medium text-slate-300/80">
+                    {video.title}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Third reel: centered, capped width */}
+            {mainReels[2] && (
+              <div className="mt-8 mx-auto max-w-2xl">
+                <VideoFacade
+                  vimeoId={mainReels[2].id}
+                  title={mainReels[2].title}
+                  vimeoUrl={`https://vimeo.com/${mainReels[2].id}`}
+                  size="large"
+                />
+                <p className="mt-3 text-center text-sm font-medium text-slate-300/80">
+                  {mainReels[2].title}
+                </p>
+              </div>
+            )}
+          </section>
+        </ScrollReveal>
+
+        {/* ── 3. Featured Credits ──────────────────────────────── */}
+        <ScrollReveal delay={120}>
+          <section className="mt-24">
+            {/* Header row */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#00D9FF]/70">
+                  Known for
+                </p>
+                <h2 className="mt-1 text-2xl font-bold text-white sm:text-3xl">
+                  Featured Credits
+                </h2>
+                <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
+              </div>
+              <a
+                href="https://www.imdb.com/name/nm8251181/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 self-start rounded-lg border border-[#F5C518]/30 bg-[#F5C518]/5 px-4 py-2 text-sm font-medium text-[#F5C518] transition-colors hover:bg-[#F5C518]/15 sm:self-auto"
+              >
+                <ImdbBadge />
+                <span>View full filmography</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  className="h-3.5 w-3.5 opacity-70"
+                >
+                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+                </svg>
+              </a>
+            </div>
+
+            {/* Film credit cards */}
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {filmCredits.map((credit) => (
+                <div
+                  key={credit.title}
+                  className="group relative overflow-hidden rounded-xl border border-[#00D9FF]/15 bg-gradient-to-br from-[#00D9FF]/5 to-white/[0.02] p-4 transition-all duration-300 hover:border-[#00D9FF]/35 hover:from-[#00D9FF]/10"
+                >
+                  {/* Subtle top accent line */}
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00D9FF]/40 to-transparent" />
+
+                  <div className="flex items-start gap-3">
+                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#00D9FF]/20 bg-[#00D9FF]/10 text-[#00D9FF]/70">
+                      <FilmIcon />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold leading-snug text-white">
+                        {credit.title}
+                      </p>
+                      <p className="mt-0.5 text-xs text-slate-500">
+                        {credit.year}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 border-t border-white/5 pt-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#00D9FF]/20 bg-[#00D9FF]/8 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#00D9FF]/90">
+                      {credit.role}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* TV credits strip */}
+            <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-3.5">
+              <span className="text-xs font-medium uppercase tracking-wider text-slate-500">
+                Recent TV
+              </span>
+              <div className="h-3 w-px bg-white/10" />
+              {tvCredits.map((credit, i) => (
+                <span key={credit.title} className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-slate-300">
+                    {credit.title}
+                  </span>
+                  <span className="rounded bg-white/8 px-1.5 py-0.5 text-[10px] font-medium text-slate-500">
+                    {credit.network} {credit.year}
+                  </span>
+                  {i < tvCredits.length - 1 && (
+                    <span className="text-slate-700">·</span>
+                  )}
+                </span>
+              ))}
+            </div>
+          </section>
+        </ScrollReveal>
+
+        {/* ── 4. Project Breakdowns (smaller, 3-col) ──────────── */}
         <ScrollReveal delay={100}>
           <section className="mt-20">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              Before &amp; After
-            </h2>
-            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
+            <SectionHeader title="Project Breakdowns" sub />
+            <p className="mt-2 text-xs text-slate-500">
+              Shot-by-shot breakdowns showing process and technique.
+            </p>
 
-            <div className="mt-8 grid gap-8 lg:grid-cols-2">
-              {beforeAfterPairs.map((pair) => (
-                <div key={pair.beforeAlt}>
-                  <BeforeAfterSlider {...pair} />
-                  <p className="mt-2 text-center text-xs text-slate-400">
-                    {pair.beforeLabel} &rarr; {pair.afterLabel}
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {breakdowns.map((video) => (
+                <div key={video.id} className="flex flex-col">
+                  <VideoFacade
+                    vimeoId={video.id}
+                    title={video.title}
+                    vimeoUrl={`https://vimeo.com/${video.id}`}
+                  />
+                  <p className="mt-2 text-center text-xs font-medium text-slate-400/80">
+                    {video.title}
                   </p>
                 </div>
               ))}
@@ -158,81 +331,208 @@ export default function VfxPage() {
           </section>
         </ScrollReveal>
 
-        {/* ── Frame Breakdown ───────────────────────────────── */}
+        {/* ── 5. Technical Tests & Studies (collapsible) ──────── */}
         <ScrollReveal delay={100}>
           <section className="mt-20">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              Frame Breakdown
-            </h2>
-            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
+            <details className="group">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-xl border border-white/10 bg-white/5 px-6 py-4 transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D9FF]">
+                <div className="text-left">
+                  <h2 className="text-xl font-semibold text-slate-300 sm:text-2xl">
+                    Technical Tests &amp; Studies
+                  </h2>
+                  <p className="mt-0.5 text-xs text-slate-500">
+                    {technicalDemos.length} demonstrations — click to expand
+                  </p>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#00D9FF"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-5 w-5 shrink-0 transition-transform duration-300 group-open:rotate-180"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </summary>
+
+              <div className="mt-2 h-px w-full bg-gradient-to-r from-[#00D9FF]/30 to-transparent" />
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {technicalDemos.map((video) => (
+                  <div key={video.id} className="flex flex-col">
+                    <VideoFacade
+                      vimeoId={video.id}
+                      title={video.title}
+                      vimeoUrl={`https://vimeo.com/${video.id}`}
+                    />
+                    <p className="mt-2 text-center text-[11px] font-medium text-slate-500">
+                      {video.title}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </details>
+          </section>
+        </ScrollReveal>
+
+        {/* ── 6. VFX Portfolio Gallery ────────────────────────── */}
+        <ScrollReveal delay={100}>
+          <section className="mt-24">
+            {/* Header */}
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#00D9FF]/70">
+                Image gallery
+              </p>
+              <h2 className="mt-1 text-2xl font-bold text-white sm:text-3xl">
+                VFX Portfolio Gallery
+              </h2>
+              <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
+              <p className="mt-2 text-sm text-slate-400">
+                3D work, additional compositing, and digital drawings
+              </p>
+            </div>
+
+            {/* Navigation hint */}
+            <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-[#00D9FF]/15 bg-[#00D9FF]/5 px-4 py-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00D9FF"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4 shrink-0 opacity-70"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M9 12h6M12 9l3 3-3 3" />
+              </svg>
+              <p className="text-xs text-slate-400">
+                Interactive gallery — click any image to view full size, use{" "}
+                <kbd className="rounded border border-white/10 bg-white/5 px-1 py-0.5 font-mono text-[10px] text-slate-300">
+                  ←
+                </kbd>{" "}
+                <kbd className="rounded border border-white/10 bg-white/5 px-1 py-0.5 font-mono text-[10px] text-slate-300">
+                  →
+                </kbd>{" "}
+                arrow keys to navigate
+              </p>
+            </div>
+
+            <div className="mt-6">
+              <PaginatedLightboxGallery
+                items={vfxGallery}
+                categories={vfxGalleryCategories}
+                accent="cyan"
+              />
+            </div>
+          </section>
+        </ScrollReveal>
+
+        {/* ── 7. Photography Gallery ───────────────────────────── */}
+        <ScrollReveal delay={100}>
+          <section className="mt-24">
+            {/* Header — amber accent to distinguish from VFX sections */}
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-amber-400/70">
+                Photography
+              </p>
+              <h2 className="mt-1 text-2xl font-bold text-white sm:text-3xl">
+                Photography &amp; Visual Studies
+              </h2>
+              <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-amber-400 to-orange-500" />
+              <p className="mt-2 text-sm text-slate-400">
+                Complementary creative work demonstrating visual storytelling
+                and composition
+              </p>
+            </div>
+
+            {/* Navigation hint */}
+            <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-amber-400/15 bg-amber-400/5 px-4 py-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#F59E0B"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4 shrink-0 opacity-70"
+              >
+                <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
+                <circle cx="12" cy="13" r="4" />
+              </svg>
+              <p className="text-xs text-slate-400">
+                Interactive gallery — click any image to view full size, use{" "}
+                <kbd className="rounded border border-white/10 bg-white/5 px-1 py-0.5 font-mono text-[10px] text-slate-300">
+                  ←
+                </kbd>{" "}
+                <kbd className="rounded border border-white/10 bg-white/5 px-1 py-0.5 font-mono text-[10px] text-slate-300">
+                  →
+                </kbd>{" "}
+                arrow keys to navigate
+              </p>
+            </div>
+
+            <div className="mt-6">
+              <PaginatedLightboxGallery
+                items={photographyGallery}
+                categories={photographyCategories}
+                accent="amber"
+              />
+            </div>
+          </section>
+        </ScrollReveal>
+
+        {/* ── 8. Shot Comparisons ─────────────────────────────── */}
+        <ScrollReveal delay={100}>
+          <section className="mt-24">
+            <SectionHeader title="Shot Comparisons" />
             <p className="mt-3 text-sm text-slate-400">
-              Step through individual compositing layers to see how a final frame
-              is built.
+              Drag the slider to compare raw plate vs. final composite.
+            </p>
+
+            <div className="mt-8 grid gap-8 lg:grid-cols-2">
+              {beforeAfterPairs.map((pair) => (
+                <div key={pair.beforeAlt}>
+                  <BeforeAfterSlider
+                    beforeSrc={pair.beforeSrc}
+                    afterSrc={pair.afterSrc}
+                    beforeAlt={pair.beforeAlt}
+                    afterAlt={pair.afterAlt}
+                    beforeLabel={pair.beforeLabel}
+                    afterLabel={pair.afterLabel}
+                  />
+                  <p className="mt-2 text-center text-xs text-slate-500">
+                    {pair.caption}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </ScrollReveal>
+
+        {/* ── 9. Frame Breakdown ──────────────────────────────── */}
+        <ScrollReveal delay={100}>
+          <section className="mt-24">
+            <SectionHeader title="Frame Breakdown" />
+            <p className="mt-3 text-sm text-slate-400">
+              Step through individual compositing layers to see how a final
+              frame is built.
             </p>
 
             <div className="mt-8">
               <FrameViewer
-                layers={frameLayers as unknown as { label: string; src: string }[]}
+                layers={frameLayers}
                 title="Hero Shot Layer Build-Up"
               />
             </div>
           </section>
         </ScrollReveal>
 
-        {/* ── Gallery ───────────────────────────────────────── */}
-        <ScrollReveal delay={100}>
-          <section className="mt-20">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              Gallery
-            </h2>
-            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
-
-            <div className="mt-8">
-              <LightboxGallery
-                items={galleryItems as unknown as { src: string; alt: string; title?: string; category: string }[]}
-                categories={galleryCategories as unknown as string[]}
-              />
-            </div>
-          </section>
-        </ScrollReveal>
-
-        {/* ── Featured Card ─────────────────────────────────── */}
-        <ScrollReveal delay={100}>
-          <section className="mt-20">
-            <div className="rounded-2xl border border-[#00D9FF]/20 bg-gradient-to-br from-[#00D9FF]/5 to-transparent p-8 backdrop-blur-sm">
-              <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-                <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-xl border border-[#00D9FF]/30 bg-[#00D9FF]/10">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#00D9FF"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="h-10 w-10"
-                  >
-                    <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white">
-                    They Shall Not Grow Old
-                  </h3>
-                  <p className="mt-1 text-sm font-medium text-[#00D9FF]/80">
-                    Restoration & Colorization Compositor
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300/80">
-                    Contributed to Peter Jackson&apos;s documentary restoring WWI
-                    archival footage. Worked on frame-by-frame colorization,
-                    stabilization, and cleanup of century-old film stock to bring
-                    historical footage to vivid life.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
       </div>
     </main>
   );
