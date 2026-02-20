@@ -61,23 +61,26 @@ const resources = [
   },
 ] as const;
 
+import PageTransition from "@/components/shared/PageTransition";
+
 export default function TeachingPage() {
   return (
+    <PageTransition>
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a1628] via-[#1a1052] to-[#2d1b69]">
       {/* Radial overlays */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(74,222,128,0.15),_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(37,201,8,0.15),_transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(139,92,246,0.15),_transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(99,102,241,0.08),_transparent_70%)]" />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-32 pb-24 sm:px-12">
         {/* Hero */}
         <section className="text-center">
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-green-300/80">
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-[#25C908]/80">
             Education
           </p>
           <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             Educational Tools{" "}
-            <span className="bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#25C908] to-green-700 bg-clip-text text-transparent glow-green">
               & Resources
             </span>
           </h1>
@@ -93,7 +96,7 @@ export default function TeachingPage() {
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
             Lesson Plan Generator
           </h2>
-          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-green-400 to-emerald-500" />
+          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#25C908] to-green-700" />
           <p className="mt-4 max-w-2xl text-slate-300/90">
             A tool designed to help educators quickly scaffold standards-aligned
             lesson plans with built-in accommodations and modifications for
@@ -104,7 +107,7 @@ export default function TeachingPage() {
             {tools.map(({ title, description }) => (
               <div
                 key={title}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-green-500/40 hover:bg-white/10 hover:-translate-y-1"
+                className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#25C908]/40 hover:bg-white/10 hover:-translate-y-1"
               >
                 <h3 className="text-lg font-semibold text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-slate-300/80">
@@ -120,15 +123,15 @@ export default function TeachingPage() {
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
             Teaching Philosophy
           </h2>
-          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-green-400 to-emerald-500" />
+          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#25C908] to-green-700" />
 
           <div className="mt-8 space-y-6">
             {philosophyPillars.map(({ title, description }, i) => (
               <div
                 key={title}
-                className="flex gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-green-500/40 hover:bg-white/10 sm:p-8"
+                className="flex gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#25C908]/40 hover:bg-white/10 sm:p-8"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-400/10 text-sm font-bold text-green-400 ring-1 ring-green-400/30">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#25C908]/10 text-sm font-bold text-[#25C908] ring-1 ring-[#25C908]/30">
                   {i + 1}
                 </span>
                 <div>
@@ -147,19 +150,19 @@ export default function TeachingPage() {
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
             Resources
           </h2>
-          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-green-400 to-emerald-500" />
+          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#25C908] to-green-700" />
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
             {resources.map(({ title, type, description }) => (
               <div
                 key={title}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-green-500/40 hover:bg-white/10 hover:-translate-y-1"
+                className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#25C908]/40 hover:bg-white/10 hover:-translate-y-1"
               >
                 <div className="flex items-center gap-3">
-                  <span className="h-2 w-2 rounded-full bg-green-400 shadow-lg shadow-green-400/50" />
+                  <span className="h-2 w-2 rounded-full bg-[#25C908]shadow-lg shadow-[#25C908]/50" />
                   <h3 className="text-lg font-semibold text-white">{title}</h3>
                 </div>
-                <span className="mt-2 inline-block rounded-full bg-green-400/10 px-3 py-0.5 text-xs font-medium text-green-300 ring-1 ring-green-400/20">
+                <span className="mt-2 inline-block rounded-full bg-[#25C908]/10 px-3 py-0.5 text-xs font-medium text-[#25C908] ring-1 ring-[#25C908]/20">
                   {type}
                 </span>
                 <p className="mt-3 text-sm leading-relaxed text-slate-300/80">
@@ -171,5 +174,6 @@ export default function TeachingPage() {
         </section>
       </div>
     </main>
+    </PageTransition>
   );
 }

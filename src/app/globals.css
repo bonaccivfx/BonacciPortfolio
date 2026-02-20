@@ -3,7 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --accent-cyan: #00D9FF;
+  /* Page accent colours */
+  --accent-vfx:      #C90808;
+  --accent-teaching: #25C908;
+  --accent-dev:      #0A8BF5;
+  /* Legacy alias used by VideoFacade / PaginatedLightboxGallery (VFX-only components) */
+  --accent-cyan: #C90808;
 }
 
 @theme inline {
@@ -91,3 +96,20 @@ body {
     transform: translateX(200%);
   }
 }
+
+@keyframes page-load-bar {
+  0%   { transform: scaleX(0); opacity: 1; }
+  65%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+/* Gradient text glow — apply to bg-clip-text spans.
+   text-shadow is invisible on transparent-fill text; drop-shadow works correctly. */
+.glow-red    { filter: drop-shadow(0 0 18px rgba(201, 8,   8,   0.45)); } /* VFX */
+.glow-green  { filter: drop-shadow(0 0 18px rgba(37,  201, 8,   0.45)); } /* Teaching */
+.glow-blue   { filter: drop-shadow(0 0 18px rgba(10,  139, 245, 0.45)); } /* Dev */
+.glow-indigo { filter: drop-shadow(0 0 16px rgba(139, 120, 255, 0.28)); } /* Multi-identity */
+/* Legacy aliases — kept so existing class names still compile */
+.glow-cyan   { filter: drop-shadow(0 0 18px rgba(201, 8,   8,   0.45)); }
+.glow-amber  { filter: drop-shadow(0 0 18px rgba(37,  201, 8,   0.45)); }
+.glow-orange { filter: drop-shadow(0 0 18px rgba(10,  139, 245, 0.45)); }

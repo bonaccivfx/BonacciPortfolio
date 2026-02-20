@@ -1,5 +1,6 @@
 import { mainReels, breakdowns, technicalDemos } from "@/data/vfx-videos";
 import ScrollReveal from "@/components/ScrollReveal";
+import PageTransition from "@/components/shared/PageTransition";
 import VideoFacade from "@/components/VideoFacade";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import FrameViewer from "@/components/FrameViewer";
@@ -89,7 +90,7 @@ function SectionHeader({
         {title}
       </h2>
       <div
-        className={`mt-2 h-0.5 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500 ${
+        className={`mt-2 h-0.5 rounded-full bg-gradient-to-r from-[#C90808] to-red-700 ${
           sub ? "w-10 opacity-60" : "w-16"
         }`}
       />
@@ -129,9 +130,10 @@ function FilmIcon() {
 
 export default function VfxPage() {
   return (
+    <PageTransition>
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a1628] via-[#1a1052] to-[#2d1b69]">
       {/* Background overlays */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,217,255,0.12),_transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(201,8,8,0.12),_transparent_50%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(139,92,246,0.15),_transparent_50%)]" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 pt-32 pb-24 sm:px-12">
@@ -139,12 +141,12 @@ export default function VfxPage() {
         {/* ── 1. Hero ─────────────────────────────────────────── */}
         <ScrollReveal>
           <section className="text-center">
-            <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-[#00D9FF]/80">
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-[#C90808]/80">
               Visual Effects
             </p>
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
               VFX Compositing{" "}
-              <span className="bg-gradient-to-r from-[#00D9FF] to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#C90808] to-red-700 bg-clip-text text-transparent glow-red">
                 Portfolio
               </span>
             </h1>
@@ -158,9 +160,9 @@ export default function VfxPage() {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl border border-[#00D9FF]/20 bg-[#00D9FF]/5 px-8 py-5 backdrop-blur-sm"
+                  className="rounded-2xl border border-[#C90808]/20 bg-[#C90808]/5 px-8 py-5 backdrop-blur-sm"
                 >
-                  <div className="text-3xl font-extrabold text-[#00D9FF]">
+                  <div className="text-3xl font-extrabold text-[#C90808]">
                     {stat.value}
                   </div>
                   <div className="mt-1 text-xs font-medium uppercase tracking-wider text-slate-400">
@@ -220,13 +222,13 @@ export default function VfxPage() {
             {/* Header row */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#00D9FF]/70">
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#C90808]/70">
                   Known for
                 </p>
                 <h2 className="mt-1 text-2xl font-bold text-white sm:text-3xl">
                   Featured Credits
                 </h2>
-                <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
+                <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#C90808] to-red-700" />
               </div>
               <a
                 href="https://www.imdb.com/name/nm8251181/"
@@ -255,13 +257,13 @@ export default function VfxPage() {
               {filmCredits.map((credit) => (
                 <div
                   key={credit.title}
-                  className="group relative overflow-hidden rounded-xl border border-[#00D9FF]/15 bg-gradient-to-br from-[#00D9FF]/5 to-white/[0.02] p-4 transition-all duration-300 hover:border-[#00D9FF]/35 hover:from-[#00D9FF]/10"
+                  className="group relative overflow-hidden rounded-xl border border-[#C90808]/15 bg-gradient-to-br from-[#C90808]/5 to-white/[0.02] p-4 transition-all duration-300 hover:border-[#C90808]/35 hover:from-[#C90808]/10"
                 >
                   {/* Subtle top accent line */}
-                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00D9FF]/40 to-transparent" />
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C90808]/40 to-transparent" />
 
                   <div className="flex items-start gap-3">
-                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#00D9FF]/20 bg-[#00D9FF]/10 text-[#00D9FF]/70">
+                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#C90808]/20 bg-[#C90808]/10 text-[#C90808]/70">
                       <FilmIcon />
                     </div>
                     <div className="min-w-0">
@@ -275,7 +277,7 @@ export default function VfxPage() {
                   </div>
 
                   <div className="mt-3 border-t border-white/5 pt-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#00D9FF]/20 bg-[#00D9FF]/8 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#00D9FF]/90">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#C90808]/20 bg-[#C90808]/8 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#C90808]/90">
                       {credit.role}
                     </span>
                   </div>
@@ -335,7 +337,7 @@ export default function VfxPage() {
         <ScrollReveal delay={100}>
           <section className="mt-20">
             <details className="group">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-xl border border-white/10 bg-white/5 px-6 py-4 transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D9FF]">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-xl border border-white/10 bg-white/5 px-6 py-4 transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C90808]">
                 <div className="text-left">
                   <h2 className="text-xl font-semibold text-slate-300 sm:text-2xl">
                     Technical Tests &amp; Studies
@@ -348,7 +350,7 @@ export default function VfxPage() {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#00D9FF"
+                  stroke="#C90808"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -358,7 +360,7 @@ export default function VfxPage() {
                 </svg>
               </summary>
 
-              <div className="mt-2 h-px w-full bg-gradient-to-r from-[#00D9FF]/30 to-transparent" />
+              <div className="mt-2 h-px w-full bg-gradient-to-r from-[#C90808]/30 to-transparent" />
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 {technicalDemos.map((video) => (
@@ -383,25 +385,25 @@ export default function VfxPage() {
           <section className="mt-24">
             {/* Header */}
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#00D9FF]/70">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#C90808]/70">
                 Image gallery
               </p>
               <h2 className="mt-1 text-2xl font-bold text-white sm:text-3xl">
                 VFX Portfolio Gallery
               </h2>
-              <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
+              <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#C90808] to-red-700" />
               <p className="mt-2 text-sm text-slate-400">
                 3D work, additional compositing, and digital drawings
               </p>
             </div>
 
             {/* Navigation hint */}
-            <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-[#00D9FF]/15 bg-[#00D9FF]/5 px-4 py-2">
+            <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-[#C90808]/15 bg-[#C90808]/5 px-4 py-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#00D9FF"
+                stroke="#C90808"
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -535,5 +537,6 @@ export default function VfxPage() {
 
       </div>
     </main>
+    </PageTransition>
   );
 }

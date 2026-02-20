@@ -55,23 +55,26 @@ const contributions = [
   },
 ] as const;
 
+import PageTransition from "@/components/shared/PageTransition";
+
 export default function DevPage() {
   return (
+    <PageTransition>
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a1628] via-[#1a1052] to-[#2d1b69]">
       {/* Radial overlays */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(251,146,60,0.15),_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(10,139,245,0.15),_transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(139,92,246,0.15),_transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(99,102,241,0.08),_transparent_70%)]" />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-32 pb-24 sm:px-12">
         {/* Hero */}
         <section className="text-center">
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-orange-300/80">
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-[#0A8BF5]/80">
             Development
           </p>
           <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             Development{" "}
-            <span className="bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#0A8BF5] to-blue-600 bg-clip-text text-transparent glow-blue">
               Projects
             </span>
           </h1>
@@ -87,13 +90,13 @@ export default function DevPage() {
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
             Featured Apps
           </h2>
-          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-orange-400 to-amber-500" />
+          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#0A8BF5] to-blue-600" />
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {apps.map(({ title, tags, description }) => (
               <div
                 key={title}
-                className="group flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-orange-500/40 hover:bg-white/10 hover:-translate-y-1"
+                className="group flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#0A8BF5]/40 hover:bg-white/10 hover:-translate-y-1"
               >
                 {/* Screenshot placeholder */}
                 <div className="mb-4 flex h-36 items-center justify-center rounded-lg border border-white/10 bg-white/5">
@@ -106,7 +109,7 @@ export default function DevPage() {
                   {tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-orange-400/10 px-3 py-0.5 text-xs font-medium text-orange-300 ring-1 ring-orange-400/20"
+                      className="rounded-full bg-[#0A8BF5]/10 px-3 py-0.5 text-xs font-medium text-[#0A8BF5] ring-1 ring-[#0A8BF5]/20"
                     >
                       {tag}
                     </span>
@@ -125,13 +128,13 @@ export default function DevPage() {
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
             Tech Stack
           </h2>
-          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-orange-400 to-amber-500" />
+          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#0A8BF5] to-blue-600" />
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             {stackCategories.map(({ category, items }) => (
               <div
                 key={category}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-orange-500/40 hover:bg-white/10"
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#0A8BF5]/40 hover:bg-white/10"
               >
                 <h3 className="text-lg font-semibold text-white">
                   {category}
@@ -139,7 +142,7 @@ export default function DevPage() {
                 <ul className="mt-4 space-y-2.5">
                   {items.map((item) => (
                     <li key={item} className="flex items-center gap-3">
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-orange-400 shadow-lg shadow-orange-400/50" />
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0A8BF5] shadow-lg shadow-[#0A8BF5]/50" />
                       <span className="text-sm text-slate-300/90">{item}</span>
                     </li>
                   ))}
@@ -154,21 +157,21 @@ export default function DevPage() {
           <h2 className="text-2xl font-bold text-white sm:text-3xl">
             Open Source Contributions
           </h2>
-          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-orange-400 to-amber-500" />
+          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#0A8BF5] to-blue-600" />
 
           <div className="mt-8 space-y-6">
             {contributions.map(({ project, role, description }) => (
               <div
                 key={project}
-                className="flex gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-orange-500/40 hover:bg-white/10 sm:p-8"
+                className="flex gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#0A8BF5]/40 hover:bg-white/10 sm:p-8"
               >
-                <span className="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-orange-400 shadow-lg shadow-orange-400/50" />
+                <span className="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-[#0A8BF5] shadow-lg shadow-[#0A8BF5]/50" />
                 <div>
                   <div className="flex flex-wrap items-center gap-3">
                     <h3 className="text-lg font-semibold text-white">
                       {project}
                     </h3>
-                    <span className="rounded-full bg-orange-400/10 px-3 py-0.5 text-xs font-medium text-orange-300 ring-1 ring-orange-400/20">
+                    <span className="rounded-full bg-[#0A8BF5]/10 px-3 py-0.5 text-xs font-medium text-[#0A8BF5] ring-1 ring-[#0A8BF5]/20">
                       {role}
                     </span>
                   </div>
@@ -182,5 +185,6 @@ export default function DevPage() {
         </section>
       </div>
     </main>
+    </PageTransition>
   );
 }

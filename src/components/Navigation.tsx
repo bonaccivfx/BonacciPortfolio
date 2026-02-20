@@ -6,28 +6,28 @@ import { usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/", accent: null },
-  { label: "About", href: "/about", accent: null },
   { label: "VFX Work", href: "/vfx", accent: "cyan" },
   { label: "Teaching Tools", href: "/teaching", accent: "green" },
   { label: "Dev Projects", href: "/dev", accent: "orange" },
+  { label: "About", href: "/about", accent: null },
   { label: "Contact", href: "/contact", accent: null },
 ] as const;
 
 const accentStyles = {
   cyan: {
-    bar: "bg-cyan-400",
-    text: "text-cyan-300",
-    border: "border-cyan-400",
+    bar: "bg-[#C90808]",
+    text: "text-[#C90808]",
+    border: "border-[#C90808]",
   },
   green: {
-    bar: "bg-green-400",
-    text: "text-green-300",
-    border: "border-green-400",
+    bar: "bg-[#25C908]",
+    text: "text-[#25C908]",
+    border: "border-[#25C908]",
   },
   orange: {
-    bar: "bg-orange-400",
-    text: "text-orange-300",
-    border: "border-orange-400",
+    bar: "bg-[#0A8BF5]",
+    text: "text-[#0A8BF5]",
+    border: "border-[#0A8BF5]",
   },
 } as const;
 
@@ -63,9 +63,9 @@ export default function Navigation() {
           {/* Logo / Brand */}
           <Link
             href="/"
-            className="text-lg font-bold bg-gradient-to-r from-blue-400 via-violet-400 to-purple-500 bg-clip-text text-transparent hover:brightness-125 transition-all duration-300"
+            className="text-xl font-extrabold tracking-wide text-[#00D9FF] transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(0,217,255,0.7)]"
           >
-            Portfolio
+            Bonacci
           </Link>
 
           {/* Desktop links */}

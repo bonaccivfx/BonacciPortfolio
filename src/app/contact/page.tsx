@@ -1,238 +1,370 @@
-const socialLinks = [
-  {
-    label: "Email",
-    href: "#",
-    value: "hello@bonacci.dev",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-      />
-    ),
-  },
+import type { ComponentType } from "react";
+import ScrollReveal from "@/components/ScrollReveal";
+import ContactForm from "@/components/ContactForm";
+import PageTransition from "@/components/shared/PageTransition";
+import { Mail, Linkedin, Instagram, Youtube, Film } from "lucide-react";
+
+/* ─── Metadata ───────────────────────────────────────────────────── */
+
+export const metadata = {
+  title: "Contact — Bonacci",
+  description:
+    "Get in touch about VFX compositing, teaching, or development projects.",
+};
+
+/* ─── Types ──────────────────────────────────────────────────────── */
+
+interface SocialLink {
+  label: string;
+  value: string;
+  href: string;
+  Icon: ComponentType<{ className?: string }> | null;
+  color: string;
+  bg: string;
+  border: string;
+  hoverBorder: string;
+  hoverBg: string;
+  vimeoIcon?: boolean;
+}
+
+/* ─── Static data ────────────────────────────────────────────────── */
+
+const socialLinks: SocialLink[] = [
   {
     label: "LinkedIn",
-    href: "#",
-    value: "linkedin.com/in/bonacci",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M20.25 14.15v4.075c0 1.013-.82 1.775-1.775 1.775h-2.45c-.955 0-1.775-.762-1.775-1.775V14.15c0-.903.738-1.65 1.65-1.65h2.7c.912 0 1.65.747 1.65 1.65ZM7.5 8.25h-3a.75.75 0 0 0-.75.75v10.5c0 .414.336.75.75.75h3a.75.75 0 0 0 .75-.75V9a.75.75 0 0 0-.75-.75ZM6 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z"
-      />
-    ),
+    value: "linkedin.com/in/alex-bonacci",
+    href: "https://www.linkedin.com/in/alex-bonacci/",
+    Icon: Linkedin,
+    color: "text-[#0A66C2]",
+    bg: "bg-[#0A66C2]/10",
+    border: "border-[#0A66C2]/20",
+    hoverBorder: "hover:border-[#0A66C2]/50",
+    hoverBg: "hover:bg-[#0A66C2]/15",
   },
   {
     label: "Instagram",
-    href: "#",
-    value: "@bonacci",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
-      />
-    ),
+    value: "@bonaccivfx",
+    href: "https://www.instagram.com/bonaccivfx/",
+    Icon: Instagram,
+    color: "text-pink-400",
+    bg: "bg-pink-400/10",
+    border: "border-pink-400/20",
+    hoverBorder: "hover:border-pink-400/50",
+    hoverBg: "hover:bg-pink-400/10",
   },
   {
     label: "Vimeo",
-    href: "#",
-    value: "vimeo.com/bonacci",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"
-      />
-    ),
+    value: "vimeo.com/user14223031",
+    href: "https://vimeo.com/user14223031",
+    Icon: null,
+    vimeoIcon: true,
+    color: "text-[#1AB7EA]",
+    bg: "bg-[#1AB7EA]/10",
+    border: "border-[#1AB7EA]/20",
+    hoverBorder: "hover:border-[#1AB7EA]/50",
+    hoverBg: "hover:bg-[#1AB7EA]/10",
   },
   {
-    label: "GitHub",
-    href: "#",
-    value: "github.com/bonacci",
-    icon: (
-      <path
+    label: "YouTube",
+    value: "@Bonaccivfx",
+    href: "https://www.youtube.com/@Bonaccivfx",
+    Icon: Youtube,
+    color: "text-red-500",
+    bg: "bg-red-500/10",
+    border: "border-red-500/20",
+    hoverBorder: "hover:border-red-500/50",
+    hoverBg: "hover:bg-red-500/10",
+  },
+  {
+    label: "IMDb",
+    value: "Alex Bonacci",
+    href: "https://www.imdb.com/name/nm8251181/",
+    Icon: Film,
+    color: "text-[#F5C518]",
+    bg: "bg-[#F5C518]/10",
+    border: "border-[#F5C518]/20",
+    hoverBorder: "hover:border-[#F5C518]/50",
+    hoverBg: "hover:bg-[#F5C518]/10",
+  },
+];
+
+/* ─── Collaboration interests ────────────────────────────────────── */
+
+interface Interest {
+  title: string;
+  icon: "film" | "graduation" | "code" | "users";
+  description: string;
+}
+
+const interests: Interest[] = [
+  {
+    title: "VFX Work",
+    icon: "film",
+    description:
+      "Feature films, episodic TV, and commercial projects. Specializing in challenging composites, paint/roto, and CG integration.",
+  },
+  {
+    title: "Teaching Opportunities",
+    icon: "graduation",
+    description:
+      "College-level VFX instruction, K-12 special education, curriculum development, and educational tool consultation.",
+  },
+  {
+    title: "Development Projects",
+    icon: "code",
+    description:
+      "Educational technology, workflow automation, and tools that solve real problems for creatives and educators.",
+  },
+  {
+    title: "Consulting",
+    icon: "users",
+    description:
+      "Pipeline development, educational program design, and bridging technical arts with traditional curriculum.",
+  },
+];
+
+/* ─── Sub-components ─────────────────────────────────────────────── */
+
+function VimeoSvg() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+      <path d="M22.396 7.164c-.093 2.026-1.507 4.799-4.245 8.32C15.322 19.2 12.928 21 10.97 21c-1.214 0-2.24-1.12-3.08-3.36-.56-2.052-1.12-4.105-1.68-6.158-.623-2.24-1.293-3.36-2.013-3.36-.156 0-.7.328-1.634.98L1.5 7.697c1.027-.903 2.04-1.806 3.037-2.709C5.942 3.768 7.1 3.148 7.909 3.07c2.054-.197 3.32 1.207 3.8 4.21.51 3.23.865 5.237 1.063 6.022.59 2.685 1.24 4.026 1.953 4.026.552 0 1.384-.873 2.495-2.62 1.11-1.747 1.704-3.08 1.784-3.998.158-1.51-.435-2.267-1.784-2.267-.636 0-1.29.146-1.962.438 1.305-4.277 3.797-6.35 7.477-6.22 2.724.088 4.007 1.853 3.849 5.303l.022-.8h-.21z" />
+    </svg>
+  );
+}
+
+function InterestIcon({ icon }: { icon: Interest["icon"] }) {
+  const shared =
+    "h-5 w-5" as const;
+
+  if (icon === "film") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
-      />
-    ),
-  },
-] as const;
+        className={shared}
+      >
+        <path d="M7 4v16M17 4v16M3 8h4m10 0h4M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+      </svg>
+    );
+  }
+
+  if (icon === "graduation") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={shared}
+      >
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+      </svg>
+    );
+  }
+
+  if (icon === "code") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={shared}
+      >
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    );
+  }
+
+  // users
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={shared}
+    >
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  );
+}
+
+/* ─── Page ───────────────────────────────────────────────────────── */
 
 export default function ContactPage() {
   return (
+    <PageTransition>
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a1628] via-[#1a1052] to-[#2d1b69]">
       {/* Radial overlays */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(79,70,229,0.2),_transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(139,92,246,0.15),_transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(99,102,241,0.08),_transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(79,70,229,0.2),_transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(139,92,246,0.15),_transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(99,102,241,0.08),_transparent_70%)]" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pt-32 pb-24 sm:px-12">
-        {/* Hero */}
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pb-24 pt-32 sm:px-12">
+
+        {/* ── 1. Hero ─────────────────────────────────────────── */}
         <section className="text-center">
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-indigo-300/80">
             Contact
           </p>
           <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Get In{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-violet-400 to-purple-500 bg-clip-text text-transparent">
-              Touch
+            Let&apos;s Create Something{" "}
+            <span className="bg-gradient-to-r from-[#00D9FF] via-blue-400 to-blue-500 bg-clip-text text-transparent glow-indigo">
+              Together
             </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300/90 sm:text-xl">
-            Whether you have a project in mind, a question about my work, or
-            just want to say hello — I&apos;d love to hear from you. Let&apos;s
-            start a conversation.
+            Whether it&apos;s compositing, teaching, or building tools—I&apos;m
+            always open to interesting challenges and collaborations.
           </p>
         </section>
 
-        <div className="mt-20 grid gap-12 lg:grid-cols-5">
-          {/* Contact Form */}
-          <section className="lg:col-span-3">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              Send a Message
-            </h2>
-            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-blue-400 via-violet-400 to-purple-500" />
+        {/* ── 2. Form + Direct Contact ─────────────────────────── */}
+        <ScrollReveal delay={0}>
+          <section className="mt-20 grid grid-cols-1 gap-12 lg:grid-cols-5">
 
-            <form
-              className="mt-8 space-y-5"
-            >
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-1.5 block text-sm font-medium text-slate-300"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    placeholder="Your name"
-                    disabled
-                    className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 backdrop-blur-sm transition-colors focus:border-violet-500/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="mb-1.5 block text-sm font-medium text-slate-300"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="you@example.com"
-                    disabled
-                    className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 backdrop-blur-sm transition-colors focus:border-violet-500/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-                  />
-                </div>
-              </div>
+            {/* Left: Contact form */}
+            <div className="lg:col-span-3">
+              <h2 className="text-2xl font-bold text-white sm:text-3xl">
+                Send a Message
+              </h2>
+              <div className="mt-2 h-0.5 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
+              <ContactForm />
+            </div>
 
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="mb-1.5 block text-sm font-medium text-slate-300"
-                >
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  placeholder="What's this about?"
-                  disabled
-                  className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 backdrop-blur-sm transition-colors focus:border-violet-500/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-                />
-              </div>
+            {/* Right: Direct contact */}
+            <div className="lg:col-span-2">
+              <h2 className="text-2xl font-bold text-white sm:text-3xl">
+                Direct Contact
+              </h2>
+              <div className="mt-2 h-0.5 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
 
-              <div>
-                <label
-                  htmlFor="message"
-                  className="mb-1.5 block text-sm font-medium text-slate-300"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  placeholder="Tell me about your project or idea..."
-                  disabled
-                  className="w-full resize-none rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-slate-500 backdrop-blur-sm transition-colors focus:border-violet-500/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:shadow-xl hover:shadow-indigo-500/30 hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+              {/* Email card */}
+              <a
+                href="mailto:bonaccivfx@gmail.com"
+                className="group mt-8 flex items-center gap-4 rounded-xl border border-[#00D9FF]/20 bg-[#00D9FF]/5 px-5 py-4 transition-all hover:border-[#00D9FF]/40 hover:bg-[#00D9FF]/10"
               >
-                Send Message
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </button>
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#00D9FF]/10 text-[#00D9FF]">
+                  <Mail className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wider text-slate-500">
+                    Email
+                  </p>
+                  <p className="mt-0.5 text-sm font-semibold text-white">
+                    bonaccivfx@gmail.com
+                  </p>
+                </div>
+              </a>
 
-              <p className="text-xs text-slate-500">
-                Form is currently a placeholder — full functionality coming soon.
-              </p>
-            </form>
-          </section>
-
-          {/* Social Links */}
-          <section className="lg:col-span-2">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              Find Me Online
-            </h2>
-            <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-blue-400 via-violet-400 to-purple-500" />
-
-            <ul className="mt-8 space-y-4">
-              {socialLinks.map(({ label, href, value, icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-sm transition-all duration-300 hover:border-purple-500/40 hover:bg-white/10"
-                  >
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/5 text-slate-400 transition-colors group-hover:text-violet-400">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
+              {/* Social links */}
+              <ul className="mt-4 space-y-3">
+                {socialLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`group flex items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-200 ${link.border} ${link.hoverBorder} ${link.hoverBg}`}
+                    >
+                      <span
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${link.bg} ${link.color}`}
                       >
-                        {icon}
-                      </svg>
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold text-white">
-                        {label}
-                      </p>
-                      <p className="text-xs text-slate-400 transition-colors group-hover:text-violet-300/80">
-                        {value}
-                      </p>
-                    </div>
-                  </a>
-                </li>
-              ))}
-            </ul>
+                        {link.vimeoIcon ? (
+                          <VimeoSvg />
+                        ) : link.Icon ? (
+                          <link.Icon className="h-5 w-5" />
+                        ) : null}
+                      </span>
+                      <div>
+                        <p className="text-sm font-medium text-white">
+                          {link.label}
+                        </p>
+                        <p className="text-xs text-slate-400">{link.value}</p>
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </section>
-        </div>
+        </ScrollReveal>
+
+        {/* ── 3. Collaboration Interests ───────────────────────── */}
+        <ScrollReveal delay={80}>
+          <section className="mt-20">
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">
+              Collaboration Interests
+            </h2>
+            <div className="mt-2 h-0.5 w-16 rounded-full bg-gradient-to-r from-[#00D9FF] to-blue-500" />
+
+            <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
+              {interests.map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:border-[#00D9FF]/25 hover:bg-white/[0.07]"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#00D9FF]/10 text-[#00D9FF]">
+                    <InterestIcon icon={item.icon} />
+                  </div>
+                  <p className="mt-4 text-base font-bold text-white">
+                    {item.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </ScrollReveal>
+
+        {/* ── 4. Response info ─────────────────────────────────── */}
+        <ScrollReveal delay={120}>
+          <section className="mt-20 text-center">
+            <p className="text-sm text-slate-400">
+              I typically respond within{" "}
+              <span className="font-medium text-slate-300">24–48 hours</span>.
+              {" "}For urgent inquiries,{" "}
+              <a
+                href="https://www.linkedin.com/in/alex-bonacci/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#00D9FF] hover:underline"
+              >
+                LinkedIn messaging
+              </a>{" "}
+              is often fastest.
+            </p>
+            <p className="mt-2 text-sm text-slate-500">
+              Based in New York &middot; Available for remote and on-site work
+            </p>
+          </section>
+        </ScrollReveal>
+
       </div>
     </main>
+    </PageTransition>
   );
 }
