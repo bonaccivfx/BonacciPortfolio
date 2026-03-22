@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — T1DG | Bonacci",
+  title: "Privacy Policy — Glucose Compass | Bonacci",
   description:
-    "How T1DG Tracker handles your health data, AI queries, advertising, and subscriptions. Apple Guideline 5.1.3 compliant.",
+    "How Glucose Compass handles your health data, AI queries, advertising, and subscriptions. Apple Guideline 5.1.3 compliant.",
 };
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
@@ -20,18 +20,18 @@ export default function T1DGPrivacyPage() {
       <nav className="mb-8 text-sm text-gray-500">
         <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
         <span className="mx-2">&gt;</span>
-        <Link href="/t1dg" className="hover:text-cyan-400 transition-colors">T1DG Tracker</Link>
+        <Link href="/t1dg" className="hover:text-cyan-400 transition-colors">Glucose Compass</Link>
         <span className="mx-2">&gt;</span>
         <span className="text-gray-400">Privacy Policy</span>
       </nav>
 
       <h1 className="mb-2 text-3xl font-bold text-white sm:text-4xl">
-        T1DG — Privacy Policy
+        Glucose Compass — Privacy Policy
       </h1>
       <p className="mb-8 text-sm text-gray-400">Last updated: March 2026</p>
 
       <p>
-        T1DG (&quot;the App&quot;) is a Type&nbsp;1 Diabetes tracking app
+        Glucose Compass (&quot;the App&quot;) is a Type&nbsp;1 Diabetes tracking app
         developed by Alex Bonacci (&quot;we,&quot; &quot;us,&quot;
         &quot;our&quot;). We take your privacy — especially regarding health
         data — very seriously. This policy explains what data we collect, how it
@@ -115,7 +115,7 @@ export default function T1DGPrivacyPage() {
       {/* ── 5. Advertising ── */}
       <SectionHeading>5. Advertising</SectionHeading>
       <p>
-        T1DG displays{" "}
+        Glucose Compass displays{" "}
         <strong className="text-white">non-personalized</strong> ads served by
         Google AdMob. Your health data is{" "}
         <strong className="text-white">
@@ -210,7 +210,7 @@ export default function T1DGPrivacyPage() {
       {/* ── 9. Children's Privacy ── */}
       <SectionHeading>9. Children&apos;s Privacy</SectionHeading>
       <p>
-        T1DG is not directed at children under 13. If a parent or guardian
+        Glucose Compass is not directed at children under 13. If a parent or guardian
         manages diabetes data for a minor, the parent or guardian is responsible
         for the data entered. We do not knowingly collect personal information
         from children under 13.
@@ -241,7 +241,7 @@ export default function T1DGPrivacyPage() {
         </p>
         <ul className="list-disc space-y-1 pl-5">
           <li>
-            Health data entered in T1DG is not sold to advertising platforms,
+            Health data entered in Glucose Compass is not sold to advertising platforms,
             data brokers, or information resellers.
           </li>
           <li>

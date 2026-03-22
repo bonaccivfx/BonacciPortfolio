@@ -5,9 +5,9 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 // export const metadata: Metadata = {
-//   title: "Support — T1DG | Bonacci",
+//   title: "Support — Glucose Compass | Bonacci",
 //   description:
-//     "Get help with T1DG Tracker. FAQ, contact information, and app support for Type 1 Diabetes tracking.",
+//     "Get help with Glucose Compass. FAQ, contact information, and app support for Type 1 Diabetes tracking.",
 // };
 // NOTE: metadata must be in a separate file for client components — see below.
 
@@ -31,7 +31,7 @@ const faqItems = [
   {
     question: "How do I manage my subscription?",
     answer:
-      "Go to iOS Settings > Apple ID > Subscriptions > T1DG Tracker. You can upgrade, downgrade, or cancel anytime.",
+      "Go to iOS Settings > Apple ID > Subscriptions > Glucose Compass. You can upgrade, downgrade, or cancel anytime.",
   },
   {
     question: "How do I delete my data?",
@@ -46,7 +46,7 @@ const faqItems = [
   {
     question: "Is this a medical device?",
     answer:
-      "No. T1DG Tracker is a personal health logging tool. It does not provide medical advice, diagnosis, or treatment recommendations. Always consult your healthcare provider.",
+      "No. Glucose Compass is a personal health logging tool. It does not provide medical advice, diagnosis, or treatment recommendations. Always consult your healthcare provider.",
   },
   {
     question: "Are my health data used for ads?",
@@ -103,23 +103,23 @@ export default function T1DGSupportPage() {
       <nav className="mb-8 text-sm text-gray-500">
         <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
         <span className="mx-2">&gt;</span>
-        <Link href="/t1dg" className="hover:text-cyan-400 transition-colors">T1DG Tracker</Link>
+        <Link href="/t1dg" className="hover:text-cyan-400 transition-colors">Glucose Compass</Link>
         <span className="mx-2">&gt;</span>
         <span className="text-gray-400">Support</span>
       </nav>
 
       <h1 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
-        T1DG — Support
+        Glucose Compass — Support
       </h1>
 
       {/* ── App Information ── */}
       <SectionHeading>App Information</SectionHeading>
       <div className="flex items-center gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-teal-500/50 bg-gray-900 text-sm font-bold text-teal-400">
-          T1DG
+          GC
         </div>
         <div>
-          <p className="font-semibold text-white">T1DG</p>
+          <p className="font-semibold text-white">Glucose Compass</p>
           <p className="text-sm text-gray-400">
             Version 1.0 &middot; iOS
           </p>
@@ -162,10 +162,10 @@ export default function T1DGSupportPage() {
       <SectionHeading>Medical Disclaimer</SectionHeading>
       <div className="rounded-lg border-l-4 border-amber-500 bg-amber-500/10 p-5">
         <p className="font-semibold text-amber-300">
-          T1DG Tracker is not a medical device.
+          Glucose Compass is not a medical device.
         </p>
         <p className="mt-2">
-          T1DG Tracker is a personal health logging tool. It does not provide
+          Glucose Compass is a personal health logging tool. It does not provide
           medical advice, diagnosis, or treatment recommendations. Always
           consult your healthcare provider for medical decisions.
         </p>

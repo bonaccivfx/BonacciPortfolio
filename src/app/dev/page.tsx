@@ -106,7 +106,7 @@ export default function DevPage() {
               </div>
 
               <div className="flex-1">
-                <h2 className="text-2xl font-bold text-white">T1DG</h2>
+                <h2 className="text-2xl font-bold text-white">Glucose Compass</h2>
                 <p className="mt-1 text-sm text-gray-400">
                   Type 1 Diabetes Tracker
                 </p>

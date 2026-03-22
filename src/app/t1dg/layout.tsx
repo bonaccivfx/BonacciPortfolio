@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "T1DG — Type 1 Diabetes Tracker | Bonacci",
+  title: "Glucose Compass — Type 1 Diabetes Tracker | Bonacci",
   description:
     "Track glucose, meals, and insulin with AI-powered insights. Free setup, local data storage, emergency alerts always free.",
 };

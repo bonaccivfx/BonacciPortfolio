@@ -152,7 +152,7 @@ export default function T1DGPage() {
             </div>
 
             <h1 className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-              T1DG
+              Glucose Compass
             </h1>
             <p className="mt-2 text-xl text-gray-400 sm:text-2xl">
               Type 1 Diabetes Tracker
@@ -384,8 +384,8 @@ export default function T1DGPage() {
           </h2>
           <p className="mb-8 leading-relaxed text-gray-300">
             Built by Bonacci — a compositor, educator, and developer who
-            believes technology should serve the people who need it most. T1DG
-            Tracker was born from personal experience and built with the same
+            believes technology should serve the people who need it most. Glucose
+            Compass was born from personal experience and built with the same
             precision applied to VFX compositing: every pixel matters, every
             interaction counts, every safety feature is non-negotiable.
           </p>
@@ -450,7 +450,7 @@ export default function T1DGPage() {
               Legal
             </h4>
             <p className="text-xs leading-relaxed text-gray-500">
-              T1DG Tracker is a personal health logging tool. It is not a
+              Glucose Compass is a personal health logging tool. It is not a
               medical device and does not provide medical advice, diagnosis, or
               treatment recommendations.
             </p>

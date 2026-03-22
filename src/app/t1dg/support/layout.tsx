@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Support — T1DG | Bonacci",
+  title: "Support — Glucose Compass | Bonacci",
   description:
-    "Get help with T1DG Tracker. FAQ, contact information, and app support for Type 1 Diabetes tracking.",
+    "Get help with Glucose Compass. FAQ, contact information, and app support for Type 1 Diabetes tracking.",
 };
 
 export default function SupportLayout({
