@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "Read(//c/Users/alexw/Documents/ClaudeProjects/**)",
+      "Bash(python3 -c \":*)",
+      "Bash(python -c \":*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

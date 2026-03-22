@@ -1,11 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Support — T1DG",
-  description:
-    "Get help with T1DG, a Type 1 Diabetes companion app. FAQs, contact info, and support resources.",
-};
+import { useState } from "react";
+import Link from "next/link";
+import { ChevronDown } from "lucide-react";
+
+// export const metadata: Metadata = {
+//   title: "Support — T1DG | Bonacci",
+//   description:
+//     "Get help with T1DG Tracker. FAQ, contact information, and app support for Type 1 Diabetes tracking.",
+// };
+// NOTE: metadata must be in a separate file for client components — see below.
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -13,149 +17,159 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function FaqItem({
-  question,
-  children,
-}: {
-  question: string;
-  children: React.ReactNode;
-}) {
+const faqItems = [
+  {
+    question: "How do I set up AI insights?",
+    answer:
+      "Go to Settings > AI Settings > select Tier 1 (Free). Follow the walkthrough to get a free Google Gemini API key from Google AI Studio. It\u2019s a one-time setup that takes about 2 minutes.",
+  },
+  {
+    question: "What data does the AI see?",
+    answer:
+      "When you request an insight, a snapshot of recent glucose, meal, and symptom data is sent to the AI provider. Your name, location, and account details are never included.",
+  },
+  {
+    question: "How do I manage my subscription?",
+    answer:
+      "Go to iOS Settings > Apple ID > Subscriptions > T1DG Tracker. You can upgrade, downgrade, or cancel anytime.",
+  },
+  {
+    question: "How do I delete my data?",
+    answer:
+      "All data is stored locally on your device. Deleting the app removes everything. To clear AI keys: Settings > AI Settings > Disconnect.",
+  },
+  {
+    question: "How do emergency contacts work?",
+    answer:
+      "Add contacts in the Emergency section. When an extreme glucose value is detected, the app asks if you\u2019d like to notify them. A 30-second countdown gives you time to cancel. Emergency features are always free.",
+  },
+  {
+    question: "Is this a medical device?",
+    answer:
+      "No. T1DG Tracker is a personal health logging tool. It does not provide medical advice, diagnosis, or treatment recommendations. Always consult your healthcare provider.",
+  },
+  {
+    question: "Are my health data used for ads?",
+    answer:
+      "Never. All ads are non-personalized. Health data is never used for advertising targeting. Premium subscribers see no ads at all.",
+  },
+  {
+    question: "Can I use my own AI provider?",
+    answer:
+      "Yes! Lifetime tier includes BYOK (Bring Your Own Key) \u2014 connect Groq, OpenRouter, Anthropic, or other providers with your own API key.",
+  },
+];
+
+function FaqAccordion() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
-    <div className="rounded-lg border border-white/10 bg-white/5 p-5">
-      <h3 className="mb-2 font-semibold text-white">{question}</h3>
-      <div className="text-gray-300 leading-relaxed">{children}</div>
+    <div className="space-y-3">
+      {faqItems.map((item, index) => {
+        const isOpen = openIndex === index;
+        return (
+          <div
+            key={index}
+            className="rounded-lg border border-white/10 bg-white/5 overflow-hidden"
+          >
+            <button
+              type="button"
+              onClick={() => setOpenIndex(isOpen ? null : index)}
+              className="flex w-full items-center justify-between px-5 py-4 text-left text-white font-semibold hover:bg-white/5 transition-colors"
+            >
+              <span>{item.question}</span>
+              <ChevronDown
+                className={`h-5 w-5 shrink-0 text-gray-400 transition-transform duration-200 ${
+                  isOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {isOpen && (
+              <div className="px-5 pb-4 text-gray-300 leading-relaxed">
+                {item.answer}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
 
 export default function T1DGSupportPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0a1628] via-[#1a1052] to-[#2d1b69] px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-3xl text-gray-300 leading-relaxed">
-        <h1 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
-          T1DG — Support
-        </h1>
+    <div className="mx-auto max-w-3xl px-4 text-gray-300 leading-relaxed pt-28 pb-24 sm:px-6 lg:px-8">
+      {/* Breadcrumb */}
+      <nav className="mb-8 text-sm text-gray-500">
+        <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
+        <span className="mx-2">&gt;</span>
+        <Link href="/t1dg" className="hover:text-cyan-400 transition-colors">T1DG Tracker</Link>
+        <span className="mx-2">&gt;</span>
+        <span className="text-gray-400">Support</span>
+      </nav>
 
-        {/* ── About the App ── */}
-        <SectionHeading>About T1DG</SectionHeading>
-        <p>
-          T1DG is a Type&nbsp;1 Diabetes companion app designed to help you log
-          blood glucose readings, insulin doses, and carbohydrate intake—all
-          stored privately on your device. Optional AI-powered insights can help
-          you identify patterns in your data, and the app is fully functional
-          without them.
-        </p>
+      <h1 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
+        T1DG — Support
+      </h1>
 
-        {/* ── Contact ── */}
-        <SectionHeading>Contact Us</SectionHeading>
-        <p>
-          For support questions, bug reports, or feedback, email us at:
-        </p>
-        <p className="mt-3">
-          <a
-            href="mailto:bonaccivfx@gmail.com"
-            className="text-cyan-400 underline hover:text-cyan-300"
-          >
-            bonaccivfx@gmail.com
-          </a>
-        </p>
-        <p className="mt-2 text-sm text-gray-400">
-          We typically respond within 48 hours.
-        </p>
-
-        {/* ── FAQ ── */}
-        <SectionHeading>Frequently Asked Questions</SectionHeading>
-        <div className="space-y-4">
-          <FaqItem question="How do I set up AI Insights?">
-            <p>
-              Open the app and navigate to <strong>Settings → AI
-              Insights</strong>. The default provider is Google Gemini, which
-              works out of the box. If you prefer a different provider, tap
-              &quot;Bring Your Own Key&quot; and enter your API key. AI insights
-              are completely optional—the app works fully without them.
-            </p>
-          </FaqItem>
-
-          <FaqItem question="How do I manage my subscription?">
-            <p>
-              Subscriptions are handled through the Apple App Store. To manage
-              or cancel your subscription, go to{" "}
-              <strong>
-                iPhone Settings → Apple ID → Subscriptions → T1DG
-              </strong>
-              . You can also manage subscriptions directly through the App Store
-              app. Your subscription status is managed by RevenueCat and
-              Apple—we do not process payments directly.
-            </p>
-          </FaqItem>
-
-          <FaqItem question="How do I delete my data?">
-            <p>
-              All your data is stored locally on your device. To delete all
-              data, simply delete the T1DG app from your device. There are no
-              cloud backups or server-side copies—once deleted, your data is
-              permanently removed. If you reinstall, you start fresh.
-            </p>
-          </FaqItem>
-
-          <FaqItem question="Can I add emergency contacts?">
-            <p>
-              Yes. Go to <strong>Settings → Emergency Contacts</strong> to add
-              contacts who can be quickly reached in an emergency. This
-              information is stored locally on your device and is not shared
-              with us or any third party.
-            </p>
-          </FaqItem>
-
-          <FaqItem question="What data does the AI see?">
-            <p>
-              When you request an AI insight, only the data relevant to your
-              query is sent—such as recent glucose readings, insulin doses, and
-              carb entries. Data is sent directly to the AI provider (Google
-              Gemini by default, or your BYOK provider) and is not stored on
-              our servers. The AI never sees your data unless you explicitly
-              request an insight. See our{" "}
-              <Link
-                href="/t1dg/privacy"
-                className="text-cyan-400 underline hover:text-cyan-300"
-              >
-                Privacy Policy
-              </Link>{" "}
-              for full details.
-            </p>
-          </FaqItem>
+      {/* ── App Information ── */}
+      <SectionHeading>App Information</SectionHeading>
+      <div className="flex items-center gap-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-teal-500/50 bg-gray-900 text-sm font-bold text-teal-400">
+          T1DG
         </div>
-
-        {/* ── Privacy Policy Link ── */}
-        <SectionHeading>Privacy Policy</SectionHeading>
-        <p>
-          Read our full{" "}
-          <Link
-            href="/t1dg/privacy"
-            className="text-cyan-400 underline hover:text-cyan-300"
-          >
-            Privacy Policy
-          </Link>{" "}
-          to understand how your data is handled and protected.
-        </p>
-
-        {/* ── Medical Disclaimer ── */}
-        <SectionHeading>Medical Disclaimer</SectionHeading>
-        <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-5">
-          <p className="font-semibold text-amber-300">
-            T1DG is not a medical device.
+        <div>
+          <p className="font-semibold text-white">T1DG</p>
+          <p className="text-sm text-gray-400">
+            Version 1.0 &middot; iOS
           </p>
-          <p className="mt-2">
-            This app is intended as a personal logging and informational tool
-            only. It does not provide medical advice, diagnoses, or treatment
-            recommendations. AI-generated insights are for informational
-            purposes and should not replace professional medical guidance.
-            Always consult your healthcare provider before making changes to
-            your diabetes management plan. In case of a medical emergency,
-            contact your local emergency services immediately.
+          <p className="text-sm text-gray-400">
+            A personal health logging tool for people with Type 1 Diabetes.
           </p>
         </div>
       </div>
-    </main>
+
+      {/* ── FAQ ── */}
+      <SectionHeading>Frequently Asked Questions</SectionHeading>
+      <FaqAccordion />
+
+      {/* ── Contact ── */}
+      <SectionHeading>Contact</SectionHeading>
+      <p>
+        For support questions, bug reports, or feedback, email us at:{" "}
+        <a
+          href="mailto:bonaccivfx@gmail.com"
+          className="text-cyan-400 underline hover:text-cyan-300"
+        >
+          bonaccivfx@gmail.com
+        </a>
+      </p>
+      <p className="mt-2 text-sm text-gray-400">
+        I typically respond within 24&ndash;48 hours.
+      </p>
+      <p className="mt-3">
+        Read our full{" "}
+        <Link
+          href="/t1dg/privacy"
+          className="text-cyan-400 underline hover:text-cyan-300"
+        >
+          Privacy Policy
+        </Link>
+        .
+      </p>
+
+      {/* ── Medical Disclaimer ── */}
+      <SectionHeading>Medical Disclaimer</SectionHeading>
+      <div className="rounded-lg border-l-4 border-amber-500 bg-amber-500/10 p-5">
+        <p className="font-semibold text-amber-300">
+          T1DG Tracker is not a medical device.
+        </p>
+        <p className="mt-2">
+          T1DG Tracker is a personal health logging tool. It does not provide
+          medical advice, diagnosis, or treatment recommendations. Always
+          consult your healthcare provider for medical decisions.
+        </p>
+      </div>
+    </div>
   );
 }

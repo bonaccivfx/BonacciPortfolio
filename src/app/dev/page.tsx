@@ -55,6 +55,8 @@ const contributions = [
   },
 ] as const;
 
+import Link from "next/link";
+import { Activity } from "lucide-react";
 import PageTransition from "@/components/shared/PageTransition";
 
 export const metadata = {
@@ -89,6 +91,60 @@ export default function DevPage() {
             classroom management platforms to VFX pipeline automation and
             modern web experiences.
           </p>
+        </section>
+
+        {/* Featured Project: T1DG */}
+        <section className="mt-20">
+          <div className="rounded-2xl border-l-4 border-[#00D9FF] bg-white/5 p-6 backdrop-blur-sm sm:p-8">
+            <span className="mb-4 inline-block rounded-full bg-[#00D9FF]/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#00D9FF]">
+              ★ Featured Project
+            </span>
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+              {/* App icon */}
+              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl border-2 border-[#00D9FF]/60 bg-[#0a1628]">
+                <Activity className="h-8 w-8 text-[#00D9FF]" />
+              </div>
+
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold text-white">T1DG</h2>
+                <p className="mt-1 text-sm text-gray-400">
+                  Type 1 Diabetes Tracker
+                </p>
+                <p className="mt-3 leading-relaxed text-slate-300/90">
+                  A personal health logging tool with AI-powered insights for
+                  people with Type 1 Diabetes. Track glucose, meals, and insulin
+                  — all stored locally on your device.
+                </p>
+
+                {/* Tech stack pills */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {["React Native", "Expo", "TypeScript", "SQLite", "Zustand", "Gemini AI", "RevenueCat"].map(
+                    (tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full bg-[#00D9FF]/10 px-3 py-0.5 text-xs font-medium text-[#00D9FF] ring-1 ring-[#00D9FF]/20"
+                      >
+                        {tech}
+                      </span>
+                    )
+                  )}
+                </div>
+
+                {/* CTAs */}
+                <div className="mt-6 flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/t1dg"
+                    className="inline-flex items-center gap-1 rounded-full bg-[#00D9FF]/10 px-5 py-2 text-sm font-medium text-[#00D9FF] ring-1 ring-[#00D9FF]/20 transition hover:bg-[#00D9FF]/20"
+                  >
+                    View Project →
+                  </Link>
+                  <span className="text-sm text-gray-500">
+                    App Store (Coming Soon)
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Featured Apps */}
