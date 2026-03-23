@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
@@ -115,9 +116,13 @@ export default function T1DGSupportPage() {
       {/* ── App Information ── */}
       <SectionHeading>App Information</SectionHeading>
       <div className="flex items-center gap-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-teal-500/50 bg-gray-900 text-sm font-bold text-teal-400">
-          GC
-        </div>
+        <Image
+          src="/images/t1dg/app-icon.png"
+          alt="Glucose Compass app icon"
+          width={48}
+          height={48}
+          className="rounded-xl"
+        />
         <div>
           <p className="font-semibold text-white">Glucose Compass</p>
           <p className="text-sm text-gray-400">

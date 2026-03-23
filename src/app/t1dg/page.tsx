@@ -1,9 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   Activity,
   Sparkles,
   ShieldCheck,
-  Smartphone,
   Database,
   Lock,
   Heart,
@@ -39,13 +39,13 @@ const features = [
 ];
 
 const screenshots = [
-  "Dashboard",
-  "AI Insights",
-  "Quick Log",
-  "History",
-  "AI Chat",
-  "AI Setup",
-  "Emergency",
+  { src: "/images/t1dg/screenshot-1.png", alt: "Glucose Compass Dashboard showing Time in Range and current glucose" },
+  { src: "/images/t1dg/screenshot-2.png", alt: "Glucose Compass AI Insights with pattern analysis" },
+  { src: "/images/t1dg/screenshot-3.png", alt: "Glucose Compass Quick Log for glucose, meals, and insulin" },
+  { src: "/images/t1dg/screenshot-4.png", alt: "Glucose Compass History view with glucose trends" },
+  { src: "/images/t1dg/screenshot-5.png", alt: "Glucose Compass AI Chat for plain-language health questions" },
+  { src: "/images/t1dg/screenshot-6.png", alt: "Glucose Compass AI Setup with Google Gemini configuration" },
+  { src: "/images/t1dg/screenshot-7.png", alt: "Glucose Compass Emergency contacts and critical alerts" },
 ];
 
 const steps = [
@@ -146,10 +146,14 @@ export default function T1DGPage() {
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 lg:flex-row lg:items-center lg:gap-20">
           {/* Left content */}
           <div className="flex flex-1 flex-col items-center text-center lg:items-start lg:text-left">
-            {/* App icon placeholder */}
-            <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-[#00D9FF]/60 bg-[#0a1628] shadow-[0_0_24px_rgba(0,217,255,0.15)]">
-              <Activity className="h-8 w-8 text-[#00D9FF]" />
-            </div>
+            {/* App icon */}
+            <Image
+              src="/images/t1dg/app-icon.png"
+              alt="Glucose Compass app icon"
+              width={64}
+              height={64}
+              className="mb-8 rounded-2xl shadow-[0_0_24px_rgba(0,217,255,0.15)]"
+            />
 
             <h1 className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
               Glucose Compass
@@ -179,18 +183,18 @@ export default function T1DGPage() {
             </a>
           </div>
 
-          {/* Phone mockup placeholder */}
+          {/* Phone mockup */}
           <div className="flex flex-shrink-0 justify-center">
             <div
-              className="flex w-[220px] items-center justify-center rounded-[2.5rem] border border-white/10 bg-[#0d1117] shadow-2xl shadow-[#00D9FF]/5 sm:w-[260px]"
-              style={{ aspectRatio: "9 / 19.5" }}
+              className="w-[220px] overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0d1117] shadow-2xl shadow-[#00D9FF]/5 sm:w-[260px]"
             >
-              <div className="flex flex-col items-center gap-2 text-center">
-                <Smartphone className="h-8 w-8 text-gray-600" />
-                <span className="text-sm text-gray-500">
-                  [Dashboard Screenshot]
-                </span>
-              </div>
+              <Image
+                src="/images/t1dg/screenshot-1.png"
+                alt="Glucose Compass Dashboard showing Time in Range and current glucose"
+                width={260}
+                height={563}
+                className="h-auto w-full"
+              />
             </div>
           </div>
         </div>
@@ -236,18 +240,19 @@ export default function T1DGPage() {
 
           {/* Scrollable on mobile, grid on desktop */}
           <div className="flex gap-5 overflow-x-auto pb-4 lg:grid lg:grid-cols-7 lg:overflow-visible">
-            {screenshots.map((label) => (
+            {screenshots.map((s) => (
               <div
-                key={label}
-                className="flex w-40 flex-shrink-0 flex-col items-center rounded-2xl border border-white/5 bg-white/[0.03] lg:w-auto"
+                key={s.src}
+                className="flex w-40 flex-shrink-0 flex-col overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] lg:w-auto"
               >
-                <div className="h-1 w-full rounded-t-2xl bg-[#00D9FF]/60" />
-                <div className="flex h-[320px] w-full items-center justify-center px-3">
-                  <div className="flex flex-col items-center gap-2 text-center">
-                    <Smartphone className="h-6 w-6 text-gray-600" />
-                    <span className="text-xs text-gray-500">{label}</span>
-                  </div>
-                </div>
+                <div className="h-1 w-full bg-[#00D9FF]/60" />
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  width={320}
+                  height={693}
+                  className="h-auto w-full"
+                />
               </div>
             ))}
           </div>

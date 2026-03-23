@@ -55,8 +55,8 @@ const contributions = [
   },
 ] as const;
 
+import Image from "next/image";
 import Link from "next/link";
-import { Activity } from "lucide-react";
 import PageTransition from "@/components/shared/PageTransition";
 
 export const metadata = {
@@ -101,9 +101,13 @@ export default function DevPage() {
             </span>
             <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
               {/* App icon */}
-              <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl border-2 border-[#00D9FF]/60 bg-[#0a1628]">
-                <Activity className="h-8 w-8 text-[#00D9FF]" />
-              </div>
+              <Image
+                src="/images/t1dg/app-icon.png"
+                alt="Glucose Compass app icon"
+                width={64}
+                height={64}
+                className="flex-shrink-0 rounded-2xl"
+              />
 
               <div className="flex-1">
                 <h2 className="text-2xl font-bold text-white">Glucose Compass</h2>
