@@ -137,7 +137,7 @@ export default function DevPage() {
                 {/* CTAs */}
                 <div className="mt-6 flex flex-wrap items-center gap-4">
                   <Link
-                    href="/t1dg"
+                    href="/glucose-compass"
                     className="inline-flex items-center gap-1 rounded-full bg-[#00D9FF]/10 px-5 py-2 text-sm font-medium text-[#00D9FF] ring-1 ring-[#00D9FF]/20 transition hover:bg-[#00D9FF]/20"
                   >
                     View Project →

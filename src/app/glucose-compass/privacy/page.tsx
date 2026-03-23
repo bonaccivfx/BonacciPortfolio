@@ -20,7 +20,7 @@ export default function T1DGPrivacyPage() {
       <nav className="mb-8 text-sm text-gray-500">
         <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
         <span className="mx-2">&gt;</span>
-        <Link href="/t1dg" className="hover:text-cyan-400 transition-colors">Glucose Compass</Link>
+        <Link href="/glucose-compass" className="hover:text-cyan-400 transition-colors">Glucose Compass</Link>
         <span className="mx-2">&gt;</span>
         <span className="text-gray-400">Privacy Policy</span>
       </nav>

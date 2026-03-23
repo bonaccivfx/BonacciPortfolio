@@ -13,7 +13,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-// Metadata is provided by the parent layout (src/app/t1dg/layout.tsx)
+// Metadata is provided by the parent layout (src/app/glucose-compass/layout.tsx)
 
 /* ─── Static data ─────────────────────────────────────────────── */
 
@@ -432,7 +432,7 @@ export default function T1DGPage() {
               </li>
               <li>
                 <Link
-                  href="/t1dg/privacy"
+                  href="/glucose-compass/privacy"
                   className="text-gray-400 transition hover:text-white"
                 >
                   Privacy Policy
@@ -440,7 +440,7 @@ export default function T1DGPage() {
               </li>
               <li>
                 <Link
-                  href="/t1dg/support"
+                  href="/glucose-compass/support"
                   className="text-gray-400 transition hover:text-white"
                 >
                   Support

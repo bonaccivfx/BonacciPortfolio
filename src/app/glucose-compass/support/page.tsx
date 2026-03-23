@@ -104,7 +104,7 @@ export default function T1DGSupportPage() {
       <nav className="mb-8 text-sm text-gray-500">
         <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
         <span className="mx-2">&gt;</span>
-        <Link href="/t1dg" className="hover:text-cyan-400 transition-colors">Glucose Compass</Link>
+        <Link href="/glucose-compass" className="hover:text-cyan-400 transition-colors">Glucose Compass</Link>
         <span className="mx-2">&gt;</span>
         <span className="text-gray-400">Support</span>
       </nav>
@@ -155,7 +155,7 @@ export default function T1DGSupportPage() {
       <p className="mt-3">
         Read our full{" "}
         <Link
-          href="/t1dg/privacy"
+          href="/glucose-compass/privacy"
           className="text-cyan-400 underline hover:text-cyan-300"
         >
           Privacy Policy
