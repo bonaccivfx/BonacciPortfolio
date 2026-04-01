@@ -38,34 +38,11 @@ const tvCredits = [
   { title: "Mr & Mrs. Smith", network: "Amazon", year: 2024 },
 ] as const;
 
-const beforeAfterPairs = [
-  {
-    beforeSrc: "/vfx/before-greenscreen.jpg",
-    afterSrc: "/vfx/after-greenscreen.jpg",
-    beforeAlt: "Raw greenscreen plate",
-    afterAlt: "Final composite with CG environment",
-    beforeLabel: "Raw Plate",
-    afterLabel: "Final Comp",
-    caption: "Greenscreen extraction & environment integration",
-  },
-  {
-    beforeSrc: "/vfx/before-cleanup.jpg",
-    afterSrc: "/vfx/after-cleanup.jpg",
-    beforeAlt: "Plate with wires and rigs visible",
-    afterAlt: "Clean plate after wire removal",
-    beforeLabel: "Production Plate",
-    afterLabel: "Cleaned Up",
-    caption: "Wire removal & rig cleanup",
-  },
-] as const;
-
 const frameLayers = [
-  { label: "Background Plate", src: "/vfx/layer-bg.jpg" },
-  { label: "Set Extension", src: "/vfx/layer-set-ext.jpg" },
-  { label: "CG Elements", src: "/vfx/layer-cg.jpg" },
-  { label: "Atmosphere & Fog", src: "/vfx/layer-atmo.jpg" },
-  { label: "Color Grade", src: "/vfx/layer-grade.jpg" },
-  { label: "Final Composite", src: "/vfx/layer-final.jpg" },
+  { label: "Original Negative", src: "/framebreakdown/oneg.webp" },
+  { label: "Background", src: "/framebreakdown/bg.webp" },
+  { label: "Background Color Corrected", src: "/framebreakdown/bgcolorcorrected.webp" },
+  { label: "Final Composite", src: "/framebreakdown/final.webp" },
 ];
 
 
@@ -333,7 +310,74 @@ export default function VfxPage() {
           </section>
         </ScrollReveal>
 
-        {/* ── 5. Technical Tests & Studies (collapsible) ──────── */}
+        {/* ── 5. Frame Breakdown ──────────────────────────────── */}
+        <ScrollReveal delay={100}>
+          <section className="mt-20">
+            <SectionHeader title="Frame Breakdown" sub />
+            <p className="mt-2 text-sm text-slate-400">
+              Step through individual compositing layers to see how a final
+              frame is built.
+            </p>
+
+            <div className="mt-6">
+              <FrameViewer
+                layers={frameLayers}
+                title="Shot Breakdown"
+              />
+            </div>
+          </section>
+        </ScrollReveal>
+
+        {/* ── 6. Shot Comparisons ─────────────────────────────── */}
+        <ScrollReveal delay={100}>
+          <section className="mt-20">
+            <SectionHeader title="Shot Comparisons" sub />
+            <p className="mt-2 text-sm text-slate-400">
+              Drag the slider to compare raw plate vs. final composite.
+            </p>
+
+            {/* Green Screen Comparison */}
+            <div className="mt-8">
+              <h3 className="mb-4 text-lg font-semibold text-teal-400">
+                Green Screen
+              </h3>
+              <BeforeAfterSlider
+                beforeSrc="/shotcomparison/greenscreen/before/momentumbefore.webp"
+                afterSrc="/shotcomparison/greenscreen/after/momentumafter.webp"
+                beforeAlt="Raw green screen plate"
+                afterAlt="Keyed composite"
+                beforeLabel="Green Screen Plate"
+                afterLabel="Keyed Composite"
+              />
+              <p className="mt-2 text-center text-xs text-slate-500">
+                Green screen extraction and integration
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div className="my-10 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+            {/* Beauty Comparison */}
+            <div>
+              <h3 className="mb-4 text-lg font-semibold text-teal-400">
+                Beauty
+              </h3>
+              <BeforeAfterSlider
+                beforeSrc="/shotcomparison/beauty/before/countourbefore.webp"
+                afterSrc="/shotcomparison/beauty/after/contourafter.webp"
+                beforeAlt="Raw plate"
+                afterAlt="Final grade"
+                beforeLabel="Raw Plate"
+                afterLabel="Final Grade"
+              />
+              <p className="mt-2 text-center text-xs text-slate-500">
+                Final colour grade and beauty pass
+              </p>
+            </div>
+          </section>
+        </ScrollReveal>
+
+        {/* ── 7. Technical Tests & Studies (collapsible) ──────── */}
         <ScrollReveal delay={100}>
           <section className="mt-20">
             <details className="group">
@@ -380,7 +424,7 @@ export default function VfxPage() {
           </section>
         </ScrollReveal>
 
-        {/* ── 6. VFX Portfolio Gallery ────────────────────────── */}
+        {/* ── 8. VFX Portfolio Gallery ────────────────────────── */}
         <ScrollReveal delay={100}>
           <section className="mt-24">
             {/* Header */}
@@ -434,7 +478,7 @@ export default function VfxPage() {
           </section>
         </ScrollReveal>
 
-        {/* ── 7. Photography Gallery ───────────────────────────── */}
+        {/* ── 9. Photography Gallery ───────────────────────────── */}
         <ScrollReveal delay={100}>
           <section className="mt-24">
             {/* Header — amber accent to distinguish from VFX sections */}
@@ -489,51 +533,6 @@ export default function VfxPage() {
           </section>
         </ScrollReveal>
 
-        {/* ── 8. Shot Comparisons ─────────────────────────────── */}
-        <ScrollReveal delay={100}>
-          <section className="mt-24">
-            <SectionHeader title="Shot Comparisons" />
-            <p className="mt-3 text-sm text-slate-400">
-              Drag the slider to compare raw plate vs. final composite.
-            </p>
-
-            <div className="mt-8 grid gap-8 lg:grid-cols-2">
-              {beforeAfterPairs.map((pair) => (
-                <div key={pair.beforeAlt}>
-                  <BeforeAfterSlider
-                    beforeSrc={pair.beforeSrc}
-                    afterSrc={pair.afterSrc}
-                    beforeAlt={pair.beforeAlt}
-                    afterAlt={pair.afterAlt}
-                    beforeLabel={pair.beforeLabel}
-                    afterLabel={pair.afterLabel}
-                  />
-                  <p className="mt-2 text-center text-xs text-slate-500">
-                    {pair.caption}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </ScrollReveal>
-
-        {/* ── 9. Frame Breakdown ──────────────────────────────── */}
-        <ScrollReveal delay={100}>
-          <section className="mt-24">
-            <SectionHeader title="Frame Breakdown" />
-            <p className="mt-3 text-sm text-slate-400">
-              Step through individual compositing layers to see how a final
-              frame is built.
-            </p>
-
-            <div className="mt-8">
-              <FrameViewer
-                layers={frameLayers}
-                title="Hero Shot Layer Build-Up"
-              />
-            </div>
-          </section>
-        </ScrollReveal>
 
       </div>
     </main>
