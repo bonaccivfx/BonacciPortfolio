@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Glucose Compass</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --border: #1f2a3d;
+      --text: #e2e8f0;
+      --muted: #8e9ab0;
+      --accent: #7c5cfc;
+      --teal: #4ecdc4;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    nav {
+      background: #0d1120;
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      margin-left: auto;
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .page-wrapper {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    .page-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .app-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .app-badge span { color: var(--teal); font-weight: 600; }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .subtitle { font-size: 1.05rem; color: var(--muted); }
+
+    /* Contact card */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(78, 205, 196, 0.06), rgba(124, 92, 252, 0.06));
+      border: 1px solid rgba(124, 92, 252, 0.3);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 0.15rem;
+    }
+    .contact-card h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .contact-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .contact-card p:last-child { margin-bottom: 0; }
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* FAQ section */
+    section { margin-bottom: 2.75rem; }
+    h2.section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      padding-left: 0.75rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 1rem; }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.1rem 1.4rem;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font);
+    }
+    .faq-question:hover { background: rgba(255,255,255,0.03); }
+    .faq-chevron {
+      font-size: 0.8rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .faq-answer {
+      display: none;
+      padding: 0 1.4rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+    /* Safety notice */
+    .safety-notice {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.75rem;
+    }
+    .safety-notice p {
+      font-size: 0.9rem;
+      color: #fca5a5;
+      line-height: 1.6;
+    }
+    .safety-notice strong { color: #fff; }
+
+    /* Links section */
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .link-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-decoration: none;
+      transition: border-color 0.2s;
+      display: block;
+    }
+    .link-card:hover {
+      border-color: var(--accent);
+      text-decoration: none;
+    }
+    .link-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .link-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.65rem; }
+      .nav-links { display: none; }
+      .contact-card { flex-direction: column; gap: 1rem; }
+      .links-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://bonaccivfx.com" class="nav-brand">Bonacci</a>
+    <ul class="nav-links">
+      <li><a href="https://bonaccivfx.com">Home</a></li>
+      <li><a href="https://bonaccivfx.com/#vfx">VFX Work</a></li>
+      <li><a href="https://bonaccivfx.com/#teaching">Teaching Tools</a></li>
+      <li><a href="https://bonaccivfx.com/#dev">Dev Projects</a></li>
+      <li><a href="https://bonaccivfx.com/#about">About</a></li>
+      <li><a href="https://bonaccivfx.com/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <div class="page-header">
+      <div class="app-badge">🩺 <span>Glucose Compass</span> — iOS App</div>
+      <h1>Support</h1>
+      <p class="subtitle">Get help with Glucose Compass, report a bug, or ask a question.</p>
+    </div>
+
+    <div class="safety-notice">
+      <p><strong>⚠️ Medical Emergency:</strong> Glucose Compass is a logging tool, not a medical device. If you are experiencing a diabetes-related emergency, call 911 or your local emergency services immediately. Do not rely on this app for emergency medical decisions.</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <h2>Contact Support</h2>
+        <p>Email us directly and we'll respond within 2–3 business days.</p>
+        <p><a href="mailto:bonaccivfx@gmail.com">bonaccivfx@gmail.com</a></p>
+        <p style="margin-top:0.65rem; font-size:0.85rem; color: #6b7a99;">Include your iOS version, app version (Settings → About), and a description of the issue.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggle(this)">
+            Is my health data stored on your servers?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-answer">
+            No. All glucose readings, meals, insulin doses, and symptoms are stored exclusively on your iPhone using local storage. We do not operate servers that receive your health data. See our <a href="https://bonaccivfx.com/t1dg/privacy">Privacy Policy</a> for full details.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggle(this)">
+            How do I set up AI features?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-answer">
+            Go to <strong>Settings → AI Provider</strong>. You can connect Google Gemini for free using your Google account (Sign in with Google), or enter your own API key from any supported provider. AI features are optional — the core logging and dashboard features work without any AI setup.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggle(this)">
+            What is the Remove Ads purchase? What does it unlock?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-answer">
+            Remove Ads is a one-time purchase that permanently removes banner and native ads from the History and Insights tabs. It does not expire and is tied to your Apple ID — you can restore it on a new device using <strong>Settings → Restore Purchases</strong>. All core features, safety features, and emergency contacts are free regardless of purchase status.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggle(this)">
+            How do I restore a purchase on a new device?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-answer">
+            Open Glucose Compass on your new device, go to <strong>Settings → Restore Purchases</strong>, and sign in with the same Apple ID you used for the original purchase. Your Remove Ads status will be restored automatically.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggle(this)">
+            What is Pip? How do I set up companion reminders?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-answer">
+            Pip is your Glucose Compass companion — a scheduled reminder system that sends you friendly nudges to log your glucose and meals throughout the day. Set up Pip in <strong>Settings → Pip Reminders</strong>. You can configure reminder times, frequency, and the tone of the messages. Pip runs through iOS local notifications and does not require an internet connection.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggle(this)">
+            How accurate is the eA1C calculation?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-answer">
+            The estimated A1C (eA1C) is calculated using the ADAG study formula (Nathan et al., 2008, <em>Diabetes Care</em>). It is an estimate based on your logged glucose readings only. Your actual lab A1C may differ. Always confirm your A1C with a lab test and discuss the results with your healthcare provider. Tap the ⓘ icon next to eA1C in the app for the full citation.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggle(this)">
+            How do I delete all my data?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-answer">
+            Your data is stored only on your device. To delete everything, go to <strong>Settings → Data → Delete All Data</strong>, or simply uninstall the app. Uninstalling removes all locally stored readings, logs, contacts, and settings permanently.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggle(this)">
+            Why does the app request camera access?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-answer">
+            Camera access is used to photograph your glucose meter display or food labels when logging entries. Photos are stored locally on your device only and are never uploaded to any server. You can deny camera access and still use all other features of the app.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Additional Resources</h2>
+      <div class="links-grid">
+        <a href="https://bonaccivfx.com/glucose-compass/privacy" class="link-card">
+          <h3>Privacy Policy</h3>
+          <p>How your health data is collected, used, and protected.</p>
+        </a>
+        <a href="https://bonaccivfx.com" class="link-card">
+          <h3>Developer</h3>
+          <p>Learn about Alex Bonacci and other projects.</p>
+        </a>
+        <a href="mailto:bonaccivfx@gmail.com" class="link-card">
+          <h3>Report a Bug</h3>
+          <p>Found something broken? Email us with your iOS version and steps to reproduce.</p>
+        </a>
+        <a href="mailto:bonaccivfx@gmail.com?subject=Feature%20Request" class="link-card">
+          <h3>Feature Request</h3>
+          <p>Have an idea to improve Glucose Compass? We'd love to hear it.</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Alex Bonacci &nbsp;·&nbsp;
+      <a href="https://bonaccivfx.com">bonaccivfx.com</a> &nbsp;·&nbsp;
+      <a href="https://bonaccivfx.com/glucose-compass/privacy">Privacy Policy</a>
+    </p>
+    <p style="margin-top:0.5rem;">Glucose Compass is not a medical device. It does not provide medical advice, diagnosis, or treatment recommendations.</p>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      var item = btn.parentElement;
+      item.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
