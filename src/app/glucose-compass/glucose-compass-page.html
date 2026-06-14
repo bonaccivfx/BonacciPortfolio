@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glucose Compass — Bonacci Dev Projects</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0e1a;
+      --surface:  #111827;
+      --border:   #1f2a3d;
+      --text:     #e2e8f0;
+      --muted:    #8e9ab0;
+      --accent:   #7c5cfc;
+      --teal:     #4ecdc4;
+      --green:    #22c55e;
+      --amber:    #f59e0b;
+      --font:     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: rgba(10, 14, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-links {
+      margin-left: auto;
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      padding: 1.25rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb .sep { color: var(--border); }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: #aab4c8;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    /* ── App mockup ── */
+    .hero-visual {
+      position: relative;
+    }
+    .mockup-frame {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 1.5rem;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+    .mockup-inner {
+      background: #0d1221;
+      border-radius: 28px;
+      overflow: hidden;
+      aspect-ratio: 9/19;
+      display: flex;
+      flex-direction: column;
+    }
+    .mockup-status {
+      padding: 0.75rem 1.25rem 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .mockup-content {
+      padding: 0.75rem 1rem;
+      flex: 1;
+      overflow: hidden;
+    }
+    .mockup-greeting {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .mockup-greeting strong { color: var(--text); }
+    .mockup-glucose-card {
+      background: linear-gradient(135deg, rgba(78,205,196,0.15), rgba(124,92,252,0.1));
+      border: 1px solid rgba(78,205,196,0.25);
+      border-radius: 16px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .mockup-glucose-val {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .mockup-glucose-unit { font-size: 0.7rem; color: var(--muted); }
+    .mockup-glucose-label { font-size: 0.65rem; color: var(--green); margin-top: 0.25rem; }
+    .mockup-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .mockup-stat {
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 0.6rem 0.5rem;
+      text-align: center;
+    }
+    .mockup-stat-val { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .mockup-stat-label { font-size: 0.55rem; color: var(--muted); margin-top: 0.1rem; }
+    .mockup-chart-placeholder {
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      height: 60px;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.5rem;
+      gap: 3px;
+      overflow: hidden;
+    }
+    .bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      min-height: 8px;
+    }
+    .mockup-nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 0.75rem 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .mockup-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .mockup-nav-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+    }
+    .mockup-nav-icon.active { background: var(--accent); }
+    .mockup-nav-label { font-size: 0.5rem; color: var(--muted); }
+    .mockup-nav-label.active { color: var(--accent); }
+
+    /* ── Content sections ── */
+    .content-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* ── Status strip ── */
+    .status-strip {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+      padding-top: 0.5rem;
+    }
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .status-chip .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+    .dot-amber { background: var(--amber); }
+    .dot-green { background: var(--green); }
+    .dot-teal { background: var(--teal); }
+
+    /* ── Section headers ── */
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    h2 .accent { color: var(--accent); }
+
+    /* ── Feature grid ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(124,92,252,0.4); }
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .feature-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .feature-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .feature-tag {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.7rem;
+      color: var(--teal);
+      background: rgba(78,205,196,0.08);
+      border: 1px solid rgba(78,205,196,0.2);
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+    }
+
+    /* ── Tier table ── */
+    .tier-section { margin-bottom: 4rem; }
+    .tier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .tier-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+    }
+    .tier-card.featured {
+      border-color: rgba(124,92,252,0.5);
+      background: linear-gradient(135deg, rgba(124,92,252,0.06), rgba(78,205,196,0.04));
+    }
+    .tier-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .tier-price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.25rem;
+    }
+    .tier-price span { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
+    .tier-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .tier-items { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .tier-items li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .tier-items li .check { color: var(--teal); flex-shrink: 0; font-size: 0.8rem; margin-top: 0.15rem; }
+    .tier-items li.safety { color: #86efac; }
+    .tier-items li.safety .check { color: var(--green); }
+    .tier-note {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: var(--green);
+      background: rgba(34,197,94,0.07);
+      border: 1px solid rgba(34,197,94,0.15);
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+    }
+
+    /* ── Tech stack ── */
+    .tech-section { margin-bottom: 4rem; }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+    .tech-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tech-pill .t-icon { font-size: 1rem; }
+
+    /* ── Links strip ── */
+    .links-strip {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      align-items: center;
+    }
+    .links-strip p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      flex: 1;
+      min-width: 200px;
+    }
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--teal);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(78,205,196,0.25);
+      border-radius: 8px;
+      transition: border-color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .link-btn:hover {
+      border-color: var(--teal);
+      background: rgba(78,205,196,0.06);
+      text-decoration: none;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-visual { max-width: 320px; margin: 0 auto; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .tech-grid { grid-template-columns: repeat(2, 1fr); }
+      .tier-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://bonaccivfx.com" class="nav-brand">Bonacci</a>
+    <ul class="nav-links">
+      <li><a href="https://bonaccivfx.com">Home</a></li>
+      <li><a href="https://bonaccivfx.com/#vfx">VFX Work</a></li>
+      <li><a href="https://bonaccivfx.com/#teaching">Teaching Tools</a></li>
+      <li><a href="https://bonaccivfx.com/#dev" class="active">Dev Projects</a></li>
+      <li><a href="https://bonaccivfx.com/#about">About</a></li>
+      <li><a href="https://bonaccivfx.com/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="https://bonaccivfx.com">Home</a>
+    <span class="sep">›</span>
+    <a href="https://bonaccivfx.com/#dev">Dev Projects</a>
+    <span class="sep">›</span>
+    <span>Glucose Compass</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="dot dot-amber"></span>
+        iOS App · Pending App Store Review
+      </div>
+      <h1>Glucose Compass</h1>
+      <p class="hero-sub">Type 1 Diabetes Tracker</p>
+      <p class="hero-desc">
+        Track glucose, meals, and insulin with AI-powered insights.
+        All your data stays on your device. Emergency features always free.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">🍎 Coming Soon on the App Store</a>
+        <a href="https://bonaccivfx.com/glucose-compass/privacy" class="btn-secondary">Privacy Policy ↗</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="mockup-frame">
+        <div class="mockup-inner">
+          <div class="mockup-status">
+            <span>09:26</span>
+            <span>⚡ ▋▋▋</span>
+          </div>
+          <div class="mockup-content">
+            <div class="mockup-greeting">Good morning, <strong>Alex</strong></div>
+            <div class="mockup-glucose-card">
+              <div class="mockup-glucose-val">87</div>
+              <div class="mockup-glucose-unit">mg/dL · just now</div>
+              <div class="mockup-glucose-label">✓ In range</div>
+            </div>
+            <div class="mockup-stats">
+              <div class="mockup-stat">
+                <div class="mockup-stat-val" style="color: var(--teal)">74%</div>
+                <div class="mockup-stat-label">Time in Range</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-val">5.8%</div>
+                <div class="mockup-stat-label">eA1C</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-val" style="color: var(--amber)">1.2U</div>
+                <div class="mockup-stat-label">IOB</div>
+              </div>
+            </div>
+            <div class="mockup-chart-placeholder">
+              <div class="bar" style="height:40%;background:var(--teal);opacity:.5"></div>
+              <div class="bar" style="height:65%;background:var(--teal);opacity:.6"></div>
+              <div class="bar" style="height:80%;background:var(--teal);opacity:.7"></div>
+              <div class="bar" style="height:55%;background:var(--teal);opacity:.6"></div>
+              <div class="bar" style="height:90%;background:var(--teal);opacity:.8"></div>
+              <div class="bar" style="height:70%;background:var(--teal);opacity:.7"></div>
+              <div class="bar" style="height:45%;background:var(--teal);opacity:.5"></div>
+              <div class="bar" style="height:60%;background:var(--teal);opacity:.6"></div>
+              <div class="bar" style="height:85%;background:var(--teal);opacity:.8"></div>
+              <div class="bar" style="height:75%;background:var(--teal);opacity:.7"></div>
+              <div class="bar" style="height:50%;background:var(--amber);opacity:.7"></div>
+              <div class="bar" style="height:40%;background:var(--teal);opacity:.5"></div>
+            </div>
+          </div>
+          <div class="mockup-nav">
+            <div class="mockup-nav-item">
+              <div class="mockup-nav-icon active"></div>
+              <div class="mockup-nav-label active">Home</div>
+            </div>
+            <div class="mockup-nav-item">
+              <div class="mockup-nav-icon"></div>
+              <div class="mockup-nav-label">Log</div>
+            </div>
+            <div class="mockup-nav-item">
+              <div class="mockup-nav-icon"></div>
+              <div class="mockup-nav-label">History</div>
+            </div>
+            <div class="mockup-nav-item">
+              <div class="mockup-nav-icon"></div>
+              <div class="mockup-nav-label">Insights</div>
+            </div>
+            <div class="mockup-nav-item">
+              <div class="mockup-nav-icon"></div>
+              <div class="mockup-nav-label">Settings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+
+    <div class="status-strip">
+      <div class="status-chip"><span class="dot dot-green"></span> v2.0.0 — Freemium Build</div>
+      <div class="status-chip"><span class="dot dot-amber"></span> App Store Review Pending</div>
+      <div class="status-chip"><span class="dot dot-teal"></span> React Native · Expo SDK 54</div>
+      <div class="status-chip"><span class="dot dot-teal"></span> iOS 16+</div>
+    </div>
+
+    <h2>What it <span class="accent">does</span></h2>
+    <div class="feature-grid" style="margin-bottom: 4rem;">
+      <div class="feature-card">
+        <div class="feature-icon">🩺</div>
+        <h3>Comprehensive Logging</h3>
+        <p>Log glucose readings, meals, symptoms, and insulin doses in seconds from a single unified entry screen.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Dashboard Intelligence</h3>
+        <p>Time in Range, estimated A1C, and Insulin on Board calculated from your logged data and displayed at a glance.</p>
+        <span class="feature-tag">Clinical citations included</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI-Powered Insights</h3>
+        <p>Pattern detection and plain-language analysis powered by Google Gemini. Free tier available — no subscription needed.</p>
+        <span class="feature-tag">Free to set up</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔔</div>
+        <h3>Pip — Smart Reminders</h3>
+        <p>A companion that nudges you to log at the right times. Local notifications only — no glucose values, no treatment suggestions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🆘</div>
+        <h3>Emergency Contacts</h3>
+        <p>Pre-fill an SMS to your emergency contacts on a severe reading. Confirmation countdown prevents accidental sends. Always free, always accessible.</p>
+        <span class="feature-tag">Always free — no paywall</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>On-Device Privacy</h3>
+        <p>All glucose, meal, and insulin data stays on your iPhone. No cloud sync, no server, no data selling. Health data never touches the ad SDK.</p>
+      </div>
+    </div>
+
+    <div class="tier-section">
+      <h2>Simple, <span class="accent">honest</span> pricing</h2>
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div class="tier-label">Free</div>
+          <div class="tier-price">$0 <span>forever</span></div>
+          <div class="tier-desc">Full logging and dashboard access. Ad-supported.</div>
+          <ul class="tier-items">
+            <li><span class="check">✓</span> Unlimited glucose, meal & insulin logging</li>
+            <li><span class="check">✓</span> Full Dashboard — TIR, eA1C, IOB</li>
+            <li><span class="check">✓</span> Complete history with search</li>
+            <li><span class="check">✓</span> AI Insights — 10 queries/day (Gemini free)</li>
+            <li><span class="check">✓</span> Bring your own API key (unlimited)</li>
+            <li><span class="check">✓</span> Pip reminder companion</li>
+            <li class="safety"><span class="check">✓</span> Emergency contacts — always free</li>
+            <li class="safety"><span class="check">✓</span> All safety features — always free</li>
+          </ul>
+          <div class="tier-note">⚡ Safety features are permanently free — no paywall, ever.</div>
+        </div>
+        <div class="tier-card featured">
+          <div class="tier-label">Remove Ads</div>
+          <div class="tier-price">One-time <span>purchase</span></div>
+          <div class="tier-desc">Everything in Free, permanently ad-free. No recurring charges.</div>
+          <ul class="tier-items">
+            <li><span class="check">✓</span> Everything in Free</li>
+            <li><span class="check">✓</span> No banner ads in History or Insights</li>
+            <li><span class="check">✓</span> 30 AI queries/day (vs. 10 free)</li>
+            <li><span class="check">✓</span> One-time payment — never expires</li>
+            <li><span class="check">✓</span> Restores on new device via Apple ID</li>
+            <li class="safety"><span class="check">✓</span> Emergency contacts — still always free</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-section">
+      <h2>Built <span class="accent">with</span></h2>
+      <div class="tech-grid">
+        <div class="tech-pill"><span class="t-icon">⚛️</span> React Native</div>
+        <div class="tech-pill"><span class="t-icon">📦</span> Expo SDK 54</div>
+        <div class="tech-pill"><span class="t-icon">🔷</span> TypeScript</div>
+        <div class="tech-pill"><span class="t-icon">💾</span> SQLite / WatermelonDB</div>
+        <div class="tech-pill"><span class="t-icon">🤖</span> Google Gemini API</div>
+        <div class="tech-pill"><span class="t-icon">💳</span> RevenueCat</div>
+        <div class="tech-pill"><span class="t-icon">📢</span> Google AdMob</div>
+        <div class="tech-pill"><span class="t-icon">🚀</span> EAS Build</div>
+      </div>
+    </div>
+
+    <div class="links-strip">
+      <p>Legal documents and support for Glucose Compass users.</p>
+      <a href="https://bonaccivfx.com/glucose-compass/privacy" class="link-btn">Privacy Policy ↗</a>
+      <a href="https://bonaccivfx.com/glucose-compass/support" class="link-btn">Support ↗</a>
+      <a href="mailto:bonaccivfx@gmail.com" class="link-btn">Contact ↗</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Alex Bonacci &nbsp;·&nbsp;
+      <a href="https://bonaccivfx.com">bonaccivfx.com</a> &nbsp;·&nbsp;
+      <a href="https://bonaccivfx.com/glucose-compass/privacy">Privacy</a> &nbsp;·&nbsp;
+      <a href="https://bonaccivfx.com/glucose-compass/support">Support</a>
+    </p>
+    <p style="margin-top:0.5rem; font-size: 0.75rem;">Glucose Compass is not a medical device and does not provide medical advice, diagnosis, or treatment recommendations.</p>
+  </footer>
+
+</body>
+</html>
