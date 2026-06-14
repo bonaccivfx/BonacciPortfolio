@@ -115,9 +115,9 @@ const pricingTiers = [
   },
   {
     name: "Remove Ads",
-    price: "One-time",
-    period: "purchase",
-    description: "Everything in Free, permanently ad-free.",
+    price: "$4.99",
+    period: "one-time",
+    description: "Everything in Free, permanently ad-free. Never expires.",
     features: [
       "Everything in Free",
       "No banner or native ads",
@@ -127,6 +127,36 @@ const pricingTiers = [
     safetyNote: "Emergency contacts still always free",
     highlighted: true,
     badge: "No Subscription",
+  },
+  {
+    name: "Supporter Monthly",
+    price: "$2.99",
+    period: "/month",
+    description: "Support ongoing development with a monthly contribution.",
+    features: [
+      "Everything in Free",
+      "Ad-free experience",
+      "30 AI queries/day",
+      "Cancel anytime",
+    ],
+    safetyNote: "Emergency contacts still always free",
+    highlighted: false,
+    badge: null,
+  },
+  {
+    name: "Supporter Annual",
+    price: "$19.99",
+    period: "/year",
+    description: "Support ongoing development — best value for long-term supporters.",
+    features: [
+      "Everything in Free",
+      "Ad-free experience",
+      "30 AI queries/day",
+      "Save vs. monthly",
+    ],
+    safetyNote: "Emergency contacts still always free",
+    highlighted: false,
+    badge: "Best Value",
   },
 ];
 
@@ -346,16 +376,16 @@ export default function GlucoseCompassPage() {
 
       {/* ── Section 5: Pricing ───────────────────────────────── */}
       <section className="px-6 py-20 lg:py-28">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-6xl">
           <h2 className="mb-4 text-center text-3xl font-bold sm:text-4xl">
             Simple, Honest Pricing
           </h2>
           <p className="mx-auto mb-14 max-w-2xl text-center text-gray-400">
-            Safety features are always free. The only paid option removes ads —
-            no subscriptions, no locked features.
+            Safety features are always free. Remove ads with a one-time
+            purchase, or support development with an optional subscription.
           </p>
 
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {pricingTiers.map((tier) => (
               <div
                 key={tier.name}
