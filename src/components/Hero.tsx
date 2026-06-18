@@ -27,6 +27,13 @@ const identities = [
     color: "#0A8BF5",
     rgb: "10,139,245",
   },
+  {
+    title: "Glucose Compass",
+    detail: "Now on the App Store",
+    href: "/glucose-compass",
+    color: "#00D9FF",
+    rgb: "0,217,255",
+  },
 ];
 
 const dropdownItems = [
@@ -217,7 +224,7 @@ export default function Hero() {
         </div>
 
         {/* ── Identity badges ─────────────────────────────────── */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-3">
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {identities.map(({ title, detail, href, color, rgb }, i) => {
             const isHovered = hoveredBadge === i;
             return (
