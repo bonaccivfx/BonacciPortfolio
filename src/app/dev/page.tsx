@@ -1,23 +1,6 @@
-const apps = [
-  {
-    title: "Classroom Dashboard",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    description:
-      "A real-time dashboard for tracking student progress, managing IEP goals, and generating weekly reports — built to streamline the daily workflow of special education teachers.",
-  },
-  {
-    title: "VFX Pipeline Tool",
-    tags: ["Python", "Node.js", "REST API"],
-    description:
-      "An internal tool that automates shot versioning, review submissions, and render-farm job tracking for compositing teams working in Nuke and After Effects.",
-  },
-  {
-    title: "Portfolio Platform",
-    tags: ["Next.js", "React", "Vercel"],
-    description:
-      "This very site — a responsive, multi-identity portfolio built with modern web technologies, designed to showcase work across VFX, education, and software development.",
-  },
-] as const;
+import Image from "next/image";
+import Link from "next/link";
+import PageTransition from "@/components/shared/PageTransition";
 
 const stackCategories = [
   {
@@ -34,35 +17,10 @@ const stackCategories = [
   },
 ] as const;
 
-const contributions = [
-  {
-    project: "Open Source Project A",
-    role: "Contributor",
-    description:
-      "Added accessibility improvements to the component library, including keyboard navigation support and ARIA labeling across interactive elements.",
-  },
-  {
-    project: "Open Source Project B",
-    role: "Contributor",
-    description:
-      "Fixed a rendering performance regression in the virtual scroll module and added unit tests to prevent future regressions.",
-  },
-  {
-    project: "Open Source Project C",
-    role: "Maintainer",
-    description:
-      "Created and maintain a lightweight CLI tool that scaffolds compositing project structures with sensible defaults for Nuke and After Effects pipelines.",
-  },
-] as const;
-
-import Image from "next/image";
-import Link from "next/link";
-import PageTransition from "@/components/shared/PageTransition";
-
 export const metadata = {
   title: "Dev Projects — Bonacci",
   description:
-    "Full-stack development projects spanning educational technology, VFX pipeline automation, and modern web applications.",
+    "Full-stack development work, including Glucose Compass — a Type 1 diabetes tracker on the App Store — alongside modern web applications.",
 };
 
 export default function DevPage() {
@@ -87,13 +45,13 @@ export default function DevPage() {
             </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-300/90 sm:text-2xl">
-            Building tools and applications that solve real problems — from
-            classroom management platforms to VFX pipeline automation and
-            modern web experiences.
+            Building tools and applications that solve real problems — including
+            Glucose Compass, a Type 1 diabetes tracker now on the App Store —
+            alongside full-stack web work.
           </p>
         </section>
 
-        {/* Featured Project: T1DG */}
+        {/* Featured Project: Glucose Compass */}
         <section className="mt-20">
           <div className="rounded-2xl border-l-4 border-[#00D9FF] bg-white/5 p-6 backdrop-blur-sm sm:p-8">
             <span className="mb-4 inline-block rounded-full bg-[#00D9FF]/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#00D9FF]">
@@ -134,65 +92,27 @@ export default function DevPage() {
                   )}
                 </div>
 
-                {/* CTAs */}
+                {/* CTAs — App Store primary, in-site page secondary */}
                 <div className="mt-6 flex flex-wrap items-center gap-4">
-                  <Link
-                    href="/glucose-compass"
-                    className="inline-flex items-center gap-1 rounded-full bg-[#00D9FF]/10 px-5 py-2 text-sm font-medium text-[#00D9FF] ring-1 ring-[#00D9FF]/20 transition hover:bg-[#00D9FF]/20"
-                  >
-                    View Project →
-                  </Link>
                   <a
                     href="https://apps.apple.com/app/id6760599854"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-[#00D9FF] transition hover:text-[#00D9FF]/80"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-[#00D9FF] px-5 py-2 text-sm font-semibold text-[#06121f] transition hover:bg-[#00D9FF]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D9FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
                   >
-                    App Store
+                    Download on the App Store
                     <span aria-hidden="true">↗</span>
                     <span className="sr-only">(opens in new tab)</span>
                   </a>
+                  <Link
+                    href="/glucose-compass"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-[#00D9FF] transition hover:text-[#00D9FF]/80"
+                  >
+                    View Project →
+                  </Link>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Featured Apps */}
-        <section className="mt-20">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">
-            Featured Apps
-          </h2>
-          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#0A8BF5] to-blue-600" />
-
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {apps.map(({ title, tags, description }) => (
-              <div
-                key={title}
-                className="group flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#0A8BF5]/40 hover:bg-white/10 hover:-translate-y-1"
-              >
-                {/* Screenshot placeholder */}
-                <div className="mb-4 flex h-36 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-                  <span className="text-sm text-slate-500">
-                    App Screenshot
-                  </span>
-                </div>
-                <h3 className="text-lg font-semibold text-white">{title}</h3>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-[#0A8BF5]/10 px-3 py-0.5 text-xs font-medium text-[#0A8BF5] ring-1 ring-[#0A8BF5]/20"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <p className="mt-3 text-base leading-relaxed text-slate-300/80">
-                  {description}
-                </p>
-              </div>
-            ))}
           </div>
         </section>
 
@@ -220,38 +140,6 @@ export default function DevPage() {
                     </li>
                   ))}
                 </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Open Source Contributions */}
-        <section className="mt-20">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">
-            Open Source Contributions
-          </h2>
-          <div className="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-[#0A8BF5] to-blue-600" />
-
-          <div className="mt-8 space-y-6">
-            {contributions.map(({ project, role, description }) => (
-              <div
-                key={project}
-                className="flex gap-5 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#0A8BF5]/40 hover:bg-white/10 sm:p-8"
-              >
-                <span className="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-[#0A8BF5] shadow-lg shadow-[#0A8BF5]/[38]" />
-                <div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="text-lg font-semibold text-white">
-                      {project}
-                    </h3>
-                    <span className="rounded-full bg-[#0A8BF5]/10 px-3 py-0.5 text-xs font-medium text-[#0A8BF5] ring-1 ring-[#0A8BF5]/20">
-                      {role}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-base leading-relaxed text-slate-300/80">
-                    {description}
-                  </p>
-                </div>
               </div>
             ))}
           </div>
