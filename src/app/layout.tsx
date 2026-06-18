@@ -14,9 +14,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bonaccivfx.com"),
   title: "Bonacci — VFX Compositor · Educator · Developer",
   description:
     "Portfolio of Alex Bonacci: 10+ years of VFX compositing across film and TV, special education teaching, and full-stack development.",
+  openGraph: {
+    siteName: "Bonacci",
+    type: "website",
+    title: "Bonacci — VFX Compositor · Educator · Developer",
+    description:
+      "Portfolio of Alex Bonacci: 10+ years of VFX compositing across film and TV, special education teaching, and full-stack development.",
+  },
 };
 
 export default function RootLayout({
