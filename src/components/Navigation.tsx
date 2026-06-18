@@ -9,6 +9,7 @@ const navLinks = [
   { label: "VFX Work",       href: "/vfx",     accent: "cyan"   },
   { label: "Teaching Tools", href: "/teaching", accent: "green"  },
   { label: "Dev Projects",   href: "/dev",     accent: "orange" },
+  { label: "Glucose Compass", href: "/glucose-compass", accent: "teal" },
   { label: "About",          href: "/about",   accent: null     },
   { label: "Contact",        href: "/contact", accent: null     },
 ] as const;
@@ -29,6 +30,14 @@ const accentStyles = {
     activeBg:  "bg-[#25C908]/10",
     hoverText: "hover:text-[#25C908]",
     hoverBg:   "hover:bg-[#25C908]/[0.08]",
+  },
+  teal: {
+    bar:       "bg-[#00D9FF]",
+    text:      "text-[#00D9FF]",
+    border:    "border-[#00D9FF]",
+    activeBg:  "bg-[#00D9FF]/10",
+    hoverText: "hover:text-[#00D9FF]",
+    hoverBg:   "hover:bg-[#00D9FF]/[0.08]",
   },
   orange: {
     bar:       "bg-[#0A8BF5]",
