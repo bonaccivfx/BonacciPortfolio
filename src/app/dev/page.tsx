@@ -142,9 +142,16 @@ export default function DevPage() {
                   >
                     View Project →
                   </Link>
-                  <span className="text-sm text-gray-500">
-                    App Store (Coming Soon)
-                  </span>
+                  <a
+                    href="https://apps.apple.com/app/id6760599854"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-[#00D9FF] transition hover:text-[#00D9FF]/80"
+                  >
+                    App Store
+                    <span aria-hidden="true">↗</span>
+                    <span className="sr-only">(opens in new tab)</span>
+                  </a>
                 </div>
               </div>
             </div>

@@ -181,7 +181,7 @@ const trustPoints = [
 
 const statusChips = [
   { label: "v2.0.0 — Freemium Build", color: "text-emerald-400 border-emerald-400/20 bg-emerald-400/5" },
-  { label: "App Store Review Pending", color: "text-amber-400 border-amber-400/20 bg-amber-400/5" },
+  { label: "Available on the App Store", color: "text-emerald-400 border-emerald-400/20 bg-emerald-400/5" },
   { label: "React Native · Expo SDK 54", color: "text-[#00D9FF] border-[#00D9FF]/20 bg-[#00D9FF]/5" },
   { label: "iOS 16+", color: "text-[#00D9FF] border-[#00D9FF]/20 bg-[#00D9FF]/5" },
 ];
@@ -233,18 +233,21 @@ export default function GlucoseCompassPage() {
             {/* CTA + links */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
               <a
-                href="#"
-                className="inline-flex items-center gap-2 rounded-full bg-black px-8 py-3.5 text-sm font-medium text-white ring-1 ring-white/20 transition hover:bg-white/10 hover:ring-white/40"
+                href="https://apps.apple.com/app/id6760599854"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Download on the App Store (opens in new tab)"
+                className="inline-block rounded-lg transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D9FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1628]"
               >
-                <svg
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                </svg>
-                Coming Soon to the App Store
+                <Image
+                  src="/images/t1dg/app-store-badge.svg"
+                  alt=""
+                  width={120}
+                  height={40}
+                  unoptimized
+                  priority
+                  className="h-[52px] w-auto"
+                />
               </a>
               <Link
                 href="/glucose-compass/privacy"
@@ -272,6 +275,31 @@ export default function GlucoseCompassPage() {
                 className="h-auto w-full"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 1.5: Why I Built This ────────────────────── */}
+      <section className="px-6 pb-4">
+        <div className="mx-auto max-w-3xl">
+          <div className="relative overflow-hidden rounded-2xl border border-[#00D9FF]/15 bg-white/[0.03] p-8 sm:p-10">
+            <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#00D9FF] via-[#00D9FF]/60 to-transparent" />
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#00D9FF]">
+              Why I Built This
+            </p>
+            <p className="mt-4 text-lg leading-relaxed text-gray-200 sm:text-xl">
+              Glucose Compass was built by someone who lives it. I&apos;ve managed
+              Type 1 Diabetes for 22 years, and I built the tracker I always wanted
+              — shaped by the daily reality of T1D, not a feature checklist.
+            </p>
+            <p className="mt-4 leading-relaxed text-gray-400">
+              My goal is simple: help others manage the day-to-day a little more
+              easily, with a tool that respects how much work living with diabetes
+              already takes.
+            </p>
+            <p className="mt-6 text-sm font-medium text-gray-500">
+              — Alex Bonacci · Type 1 Diabetic of 22 years
+            </p>
           </div>
         </div>
       </section>
@@ -514,10 +542,13 @@ export default function GlucoseCompassPage() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="#"
+                  href="https://apps.apple.com/app/id6760599854"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 transition hover:text-white"
                 >
-                  Download (Coming Soon)
+                  Download on the App Store
+                  <span className="sr-only"> (opens in new tab)</span>
                 </a>
               </li>
               <li>
